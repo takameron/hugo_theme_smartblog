@@ -1,0 +1,63 @@
+{{- $origsrc := "" -}}
+{{- $resizesrc_orig := "" -}}
+{{- $resizesrc_webp := "" -}}
+{{- $w := .Get "w" -}}
+{{- $h := .Get "h" -}}
+{{- $alt := "" -}}
+
+{{- $src := .Get "src" | default (.Get 0) -}}
+{{- $original := .Page.Resources.GetMatch $src -}}
+{{- if $original -}}
+  {{- $resized_orig := $original -}}
+  {{- $resized_webp := $original -}}
+
+  {{- $size := "" -}}
+  {{- if or (.Get "w") (.Get "h" ) -}}
+    {{- $size = print $w "x" $h -}}
+  {{- else -}}
+    {{- if gt $original.Width 500 -}}
+      {{- $size = "500x" -}}
+    {{- else -}}
+      {{- $size = print $original.Width "x" -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $resized_orig = $original.Resize (print $size " q90") -}}
+  {{- $resized_webp = $original.Resize (print $size " q90 webp") -}}
+  {{- $origsrc = $original.RelPermalink -}}
+  {{- $resizesrc_orig = $resized_orig.RelPermalink -}}
+  {{- $resizesrc_webp = $resized_webp.RelPermalink -}}
+  {{- $w = $resized_orig.Width -}}
+  {{- $h = $resized_orig.Height -}}
+{{- else -}}
+  {{- $origsrc = $src -}}
+  {{- $resizesrc_orig = $src -}}
+  {{- $resizesrc_webp = $src -}}
+  {{- $w = .Get "w" | default 500 -}}
+  {{- $h = .Get "h" | default 375 -}}
+{{- end -}}
+
+{{- if .Get "alt" -}}
+  {{- $alt = .Get "alt" -}}
+{{- else -}}
+  {{- $alt = .Get "caption" -}}
+{{- end -}}
+
+<figure {{ if .Get "class" }}class="{{ .Get "class" }}"{{ end }}>
+  <a href="{{ $origsrc }}">
+    <picture>
+      <source srcset="{{ $resizesrc_webp }}" type="image/webp">
+      <img loading="lazy" width="{{ $w }}" height="{{ $h }}" src="{{ $resizesrc_orig }}" alt="{{ $alt }}">
+    </picture>
+  </a>
+
+  {{- if .Get "caption" -}}
+  <figcaption>
+    {{- if .Get "href" -}}
+    <a href="{{ .Get "href" }}" target="_blank" rel="noopener" class="icon-new-tab">{{ .Get "caption" }}</a>
+    {{- else -}}
+    {{- .Get "caption" -}}
+    {{- end -}}
+  </figcaption>
+  {{- end -}}
+</figure>

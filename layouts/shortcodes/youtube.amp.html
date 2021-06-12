@@ -1,0 +1,11 @@
+{{- $pc := .Page.Site.Config.Privacy.YouTube -}}
+{{- if not $pc.Disable -}}
+<amp-youtube
+  data-videoid="{{ .Get "id" | default (.Get 0) }}"
+  layout="{{ .Get "layout" | default "responsive" }}"
+  width="{{ .Get "w" | default 480 }}"
+  height="{{ .Get "h" | default 270 }}"
+  {{ if $pc.PrivacyEnhanced }}credentials="omit"{{ end }}
+  {{ with .Get "autoplay" }}{{ if eq . "true" }}autoplay{{ end }}{{ end }}
+></amp-youtube>
+{{ end -}}

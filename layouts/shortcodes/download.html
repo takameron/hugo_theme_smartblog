@@ -1,0 +1,14 @@
+{{- $src := .Get "src" | default (.Get 0) -}}
+{{- $title := .Get "title" | default (.Get 1) -}}
+{{- $description := .Get "description" | default (.Get 2) -}}
+{{- if eq $title "" -}}
+  {{- $title = $src -}}
+{{- end -}}
+
+<div class="download l-flex box">
+  <span class="icon-download3"></span>
+  <div class="blogcard-body l-flex l-flex-column">
+    <a href="{{ $src }}" target="_blank" rel="noopener" class="download-title">{{ $title }}</a>
+    <span class="download-description">{{ $description }}</span>
+  </div>
+</div>

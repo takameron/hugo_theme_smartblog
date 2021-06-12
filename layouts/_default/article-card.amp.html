@@ -1,0 +1,18 @@
+<article>
+  <a href="{{ .Permalink }}" title="{{ .Title }}" class="article-card l-flex l-flex-wrap box">
+    <div class="article-card-picture">
+      {{- with .Params.images }}
+      {{- range first 1 . }}<amp-img width=267 height=150 class="article-card-img" src="{{ . | absURL }}" alt="thumbnail"></amp-img>{{- end }}
+      {{- else }}<amp-img width=267 height=150 class="article-card-img" src="/img/default.png" alt="thumbnail"></amp-img>
+      {{- end }}
+    </div>
+
+    <div class="article-card-body l-flex l-flex-column">
+      <h2 class="article-card-title">{{ .Title }}</h2>
+      <span class="article-card-summary">{{ .Summary }}</span>
+      <div class="article-card-time l-bottom">
+        {{ partial "article/time.html" . }}
+      </div>
+    </div>
+  </a>
+</article>

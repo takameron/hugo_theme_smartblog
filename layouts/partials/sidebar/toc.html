@@ -1,0 +1,8 @@
+{{- if .Params.toc -}}
+<section class="sidebar-item sidebar-toc">
+  <h2 class="sidebar-item-title">TOC</h2>
+  <div class="sidebar-content sidebar-toc-content toc">
+  {{ .TableOfContents }}
+  </div>
+</section>
+{{- end -}}

@@ -1,0 +1,54 @@
+<!-- https://blog.a-1.dev/post/2019-04-20-blog-card/ -->
+{{- $url := .Get 0 -}}
+{{- $getURL := printf "https://meta.tsukayaku.workers.dev/?%s" (querify "url" $url ) -}}
+{{- $metajson := getJSON $getURL -}}
+{{- $urlInfo := urls.Parse $url -}}
+{{- $host := printf "%s://%s/" $urlInfo.Scheme $urlInfo.Host -}}
+{{- $favicon := printf "https://www.google.com/s2/favicons?domain=%s" $urlInfo.Host -}}
+
+{{- $title := "" -}}
+{{- $description := "" -}}
+{{- $image := "" -}}
+
+{{- if $metajson.success -}}
+  {{- if $metajson.title -}}
+    {{- $title = $metajson.title -}}
+  {{- else if $metajson.og_title -}}
+    {{- $title = $metajson.og_title -}}
+  {{- else -}}
+    {{- $title = $host -}}
+  {{- end -}}
+
+  {{- if $metajson.description -}}
+    {{- $description = $metajson.description -}}
+  {{- else if $metajson.og_description -}}
+    {{- $description = $metajson.og_description -}}
+  {{- end -}}
+
+  {{- if $metajson.og_image -}}
+    {{- $image = $metajson.og_image -}}
+  {{- else if $metajson.twitter_image -}}
+    {{- $image = $metajson.twitter_image -}}
+  {{- end -}}
+{{- else -}}
+  {{- $title := $metajson.url -}}
+  {{- $description := $metajson.statusText -}}
+{{- end -}}
+
+{{ $image = replaceRE "^/" $host $image }}
+
+<div class="blogcard l-flex box">
+  <div class="blogcard-body l-flex l-flex-column">
+    <a href="{{ $url }}" target="_blank" rel="noopener" class="blogcard-title">{{ $title }}</a>
+    <span class="blogcard-description">{{ $description }}</span>
+    <a href="{{ $host }}" target="_blank" rel="noopener" class="blogcard-host l-bottom">
+      <amp-img width=16 height=16 class="blogcard-favicon" src="{{ $favicon }}" alt="favicon"></amp-img>
+      {{ $urlInfo.Host }}
+    </a>
+  </div>
+  <div class="blogcard-picture">
+    {{- if ne $image "" -}}
+      <amp-img width=150 height=150 class="blogcard-img" src="{{ $image }}" alt="thumbnail">
+    {{- end -}}
+  </div>
+</div>

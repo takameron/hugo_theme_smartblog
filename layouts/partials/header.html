@@ -1,0 +1,6 @@
+<header class="l-header site-header">
+  <a href="{{ .Site.BaseURL }}" class="site-header-title">{{ .Site.Title }}</a>
+  {{- with .Site.Params.Description }}
+  <div class="site-header-description">{{ . | markdownify}}</div>
+  {{- end }}
+</header>

@@ -1,0 +1,8 @@
+<section class="sidebar-item">
+  <h2 class="sidebar-item-title">LATESTS</h2>
+  <div class="sidebar-content">
+  {{- range $i, $p := (first 5 .Site.RegularPages) -}}
+  {{ .Render "article-tag" }}
+  {{- end -}}
+  </div>
+</section>

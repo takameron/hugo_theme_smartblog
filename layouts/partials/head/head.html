@@ -1,0 +1,31 @@
+<meta charset="UTF-8">
+<link rel="canonical" href="{{ .Permalink }}">
+{{- range .AlternativeOutputFormats }}
+<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
+{{- end }}
+{{ with .Site.Params.logo }}<link rel="apple-touch-icon" href="{{ . }}">{{ end }}
+{{- $style1 :=  resources.Get "sass/style.scss" | resources.ExecuteAsTemplate "style.scss" . }}
+{{- $style2 :=  resources.Get "sass/_base.scss" }}
+{{- $style3 :=  resources.Get "sass/_layout.scss" }}
+{{- $style4 :=  resources.Get "sass/_module.scss" }}
+{{- $style := slice $style1 $style2 $style3 $style4 | resources.Concat "main.scss" | toCSS | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
+{{- with resources.Get "font.css" | toCSS | minify | fingerprint }}
+<link rel="stylesheet" href="{{ .Permalink }}" integrity="{{ .Data.Integrity }}" media="print" onload="this.media='all'; this.onload=null;">
+<noscript><link rel="stylesheet" href="{{ .Permalink }}" integrity="{{ .Data.Integrity }}"></noscript>
+{{- end }}
+{{- with resources.Get "syntax.css" | toCSS | minify | fingerprint }}
+<link rel="stylesheet" href="{{ .Permalink }}" integrity="{{ .Data.Integrity }}" media="print" onload="this.media='all'; this.onload=null;">
+<noscript><link rel="stylesheet" href="{{ .Permalink }}" integrity="{{ .Data.Integrity }}"></noscript>
+{{- end }}
+{{ partial "head/external.html" . }}
+
+{{ with .Site.Params.color.primary }}<meta name="theme-color" content="{{ . }}">{{ end }}
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
+{{ hugo.Generator }}
+{{ template "_internal/schema.html" . }}
+{{ template "_internal/opengraph.html" . }}
+{{- template "_internal/twitter_cards.html" . -}}
+{{- template "_internal/google_analytics.html" . -}}
+{{- partial "head/site_schema.html" . -}}

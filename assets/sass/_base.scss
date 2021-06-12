@@ -1,0 +1,91 @@
+body {
+  padding: 0;
+  margin: 0;
+  line-height: 1.5em;
+  color: #333;
+  font: {
+    family: -apple-system, blinkmacsystemfont, "Helvetica Neue", arial, "Hiragino Kaku Gothic ProN", meiryo, sans-serif;
+    size: 18px;
+  }
+}
+
+code {
+  font: {
+    family: "SFMono-Regular", "Consolas", "Courier New", "Courier", monospace;
+  }
+}
+
+a {
+  color: $color-link;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+figure {
+  margin: 0;
+}
+
+strong {
+  background: linear-gradient(transparent 60%, #ffcf66 60%);
+}
+
+blockquote {
+  position: relative;
+  padding: 25px 55px;
+  margin: 0;
+  color: #2b2b2b;
+  background: #f7f6f5;
+  border-radius: 10px;
+
+  &::before {
+    position: absolute;
+    top: 40px;
+    left: 10px;
+    font-family: serif;
+    font-size: 100px;
+    color: #dcdcdc;
+    content: '“';
+  }
+
+  &::after {
+    position: absolute;
+    right: 10px;
+    bottom: -10px;
+    font-family: serif;
+    font-size: 100px;
+    color: #dcdcdc;
+    content: '”';
+  }
+
+  cite {
+    display: block;
+    padding-right: 20px;
+    font-size: 0.9rem;
+    color: #888;
+    text-align: right;
+  }
+}
+
+h2 {
+  padding: 0.5em 0.5em;
+  font-size: 1.7em;
+  background: #f4f4f4;
+  border-bottom: solid 3px #d7d7d7;
+  border-left: solid 5px $color-secondary;
+}
+
+h3 {
+  padding: 0.4em 0.5em;
+  font-size: 1.3em;
+  border-bottom: solid 3px #d7d7d7;
+  border-left: solid 5px $color-secondary;
+}
+
+h4 {
+  padding: 0.3em 0.5em;
+  font-size: 1.1em;
+  border-left: solid 5px $color-secondary;
+}

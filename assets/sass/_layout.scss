@@ -1,0 +1,82 @@
+$breakpoint-mobile: 800px;
+
+@mixin max-screen($break-point) {
+  @media screen and (max-width: $break-point) {
+    @content;
+  }
+}
+
+@mixin min-screen($break-point) {
+  @media screen and (min-width: $break-point) {
+    @content;
+  }
+}
+
+@mixin screen($break-point-min, $break-point-max) {
+  @media screen and (min-width: $break-point-min) and (max-width: $break-point-max) {
+    @content;
+  }
+}
+
+.l-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.l-flex-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.l-flex-column {
+  flex-direction: column;
+}
+
+.l-bottom {
+  margin-top: auto;
+}
+
+.l-container {
+  max-width: $width-container;
+  margin: 0 auto;
+
+  @include max-screen($breakpoint-mobile) {
+    flex-flow: column;
+  }
+}
+
+.l-main {
+  width: $width-main;
+  margin: 5%;
+
+  @include max-screen($breakpoint-mobile) {
+    width: auto;
+  }
+}
+
+.l-sidebar {
+  width: $width-sidebar;
+  margin: 5%;
+
+  @include min-screen($breakpoint-mobile) {
+    margin-left: 0;
+  }
+
+  @include max-screen($breakpoint-mobile) {
+    width: auto;
+  }
+}
+
+.l-header {
+  width: 100%;
+  padding: 1rem 0;
+}
+
+.l-footer {
+  width: 100%;
+  padding: 1rem 0;
+}

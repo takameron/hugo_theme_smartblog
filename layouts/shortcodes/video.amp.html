@@ -1,0 +1,28 @@
+{{- $origsrc := "" -}}
+{{- $w := 0 -}}
+{{- $h := 0 -}}
+{{- $poster := .Get "poster" | default "/img/movie-cover.png" -}}
+{{- $layout := .Get "layout" | default "responsive" -}}
+
+{{- $src := .Get "src" | default (.Get 0) -}}
+{{- $original := .Page.Resources.GetMatch $src -}}
+{{- if $original -}}
+  {{- $origsrc = $original.RelPermalink -}}
+  {{- $w = $original.Width -}}
+  {{- $h = $original.Height -}}
+{{- else -}}
+  {{- $origsrc = $src -}}
+  {{- $w = .Get "w" | default 500 -}}
+  {{- $h = .Get "h" | default 375 -}}
+{{- end -}}
+
+<amp-video controls {{ with (.Get "attributes") }}{{ . }}{{ end }}
+  width="{{ $w }}"
+  height="{{ $h }}"
+  layout="{{ $layout }}"
+  src="{{ $origsrc }}"
+  poster="{{ $poster }}">
+  <div fallback>
+    <p>This browser does not support the video element.</p>
+  </div>
+</amp-video>
