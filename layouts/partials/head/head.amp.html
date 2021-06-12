@@ -7,7 +7,8 @@
 {{- $style2 :=  resources.Get "sass/_base.scss" }}
 {{- $style3 :=  resources.Get "sass/_layout.scss" }}
 {{- $style4 :=  resources.Get "sass/_module.scss" }}
-{{- $style := slice $style1 $style2 $style3 $style4 | resources.Concat "main.scss" | toCSS | minify }}
+{{- $style5 :=  resources.Get "sass/_shortcodes.scss" }}
+{{- $style := slice $style1 $style2 $style3 $style4 $style5 | resources.Concat "main.scss" | toCSS | minify }}
 <style amp-custom>
   {{ replace $style.Content `@charset "UTF-8";` "" | safeCSS }}
 
@@ -19,6 +20,7 @@
     {{ replace .Content `@charset "UTF-8";` "" | safeCSS }}
   {{- end }}
 </style>
+<link rel="preload" href="/fonts/icomoon.ttf?9ton9s" type="font/ttf" as="font" crossorigin>
 {{ partial "head/amp-boilerplate.html" }}
 {{ partial "head/external.amp.html" . }}
 
