@@ -14,6 +14,10 @@
 {{- with resources.Get "font.css" | toCSS | minify | fingerprint }}
 <link rel="stylesheet" href="{{ .Permalink }}" integrity="{{ .Data.Integrity }}" media="print" onload="this.media='all'; this.onload=null;">
 <noscript><link rel="stylesheet" href="{{ .Permalink }}" integrity="{{ .Data.Integrity }}"></noscript>
+<link rel="preload" as="font" crossorigin group>
+  <link href="/fonts/icomoon.ttf?9ton9s" type="font/ttf">
+  <link href="/fonts/icomoon.woff?9ton9s" type="font/woff">
+</link>
 {{- end }}
 {{- with resources.Get "syntax.css" | toCSS | minify | fingerprint }}
 <link rel="stylesheet" href="{{ .Permalink }}" integrity="{{ .Data.Integrity }}" media="print" onload="this.media='all'; this.onload=null;">
