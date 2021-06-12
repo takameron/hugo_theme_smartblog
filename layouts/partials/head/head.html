@@ -8,7 +8,8 @@
 {{- $style2 :=  resources.Get "sass/_base.scss" }}
 {{- $style3 :=  resources.Get "sass/_layout.scss" }}
 {{- $style4 :=  resources.Get "sass/_module.scss" }}
-{{- $style := slice $style1 $style2 $style3 $style4 | resources.Concat "main.scss" | toCSS | minify | fingerprint }}
+{{- $style5 :=  resources.Get "sass/_shortcodes.scss" }}
+{{- $style := slice $style1 $style2 $style3 $style4 $style5 | resources.Concat "main.scss" | toCSS | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
 {{- with resources.Get "font.css" | toCSS | minify | fingerprint }}
 <link rel="stylesheet" href="{{ .Permalink }}" integrity="{{ .Data.Integrity }}" media="print" onload="this.media='all'; this.onload=null;">
