@@ -1,0 +1,35 @@
+{{ define "title" }}{{ .Title }} - {{ .Site.Title }}{{ end }}
+{{ define "main" }}
+<main class="l-main">
+  <article>
+    <header>
+      <aside class="single-categoriess l-flex-wrap">
+        {{- range .Params.categories }}
+        <span class="category icon-folder"><a href="/categories/{{ . | urlize }}">{{ . }}</a></span>
+        {{- end }}
+      </aside>
+      <h1 class="single-title">{{ .Title }}</h1>
+      {{ partial "article/time.html" . }}
+      <aside class="single-tags l-flex-wrap">
+        {{- range .Params.tags }}
+        <span class="tag icon-price-tag"><a href="/tags/{{ . | urlize }}">{{ . }}</a></span>
+        {{- end }}
+      </aside>
+      {{- with .Params.images }}
+      {{- range first 1 . }}<amp-img width=640 height=360 src="{{ . | absURL }}" alt="thumbnail" class="single-thumb"></amp-img>{{ end -}}
+      {{- end }}
+    </header>
+    <div class="toc">
+    {{ partial "article/toc.html" . }}
+    </div>
+    <div class="single-content">
+    {{ .Content }}
+    </div>
+    <footer class="single-footer">
+      <aside class="single-share l-flex-wrap">
+        {{ partial "article/share.html" . }}
+      </aside>
+    </footer>
+  </article>
+</main>
+{{ end }}

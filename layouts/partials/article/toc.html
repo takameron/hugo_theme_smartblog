@@ -1,0 +1,9 @@
+{{- if .Params.toc -}}
+<aside class="single-toc">
+  <input id="single-toc-check" class="single-toc-check" type="checkbox">
+  <label class="single-toc-title icon-list2" for="single-toc-check">TOC</label>
+  <div class="single-toc-content">
+    {{ .TableOfContents }}
+  </div>
+</aside>
+{{- end -}}

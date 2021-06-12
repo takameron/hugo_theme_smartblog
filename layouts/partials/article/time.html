@@ -1,0 +1,4 @@
+<time class="time-create icon-calendar">{{ .Date.Format "2006-01-02" }}</time>
+{{- if ne .Date .Lastmod }}
+<time class="time-update icon-loop2">{{ .Lastmod.Format "2006-01-02" }}</time>
+{{- end -}}

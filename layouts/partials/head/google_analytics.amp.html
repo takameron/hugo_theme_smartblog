@@ -1,0 +1,40 @@
+{{- $pc := .Site.Config.Privacy.GoogleAnalytics -}}
+{{- if not $pc.Disable }}
+{{- if and .Site.GoogleAnalytics (ne (getenv "HUGO_ENV") "DEV") -}}
+  {{- with .Site.GoogleAnalytics }}
+    {{- if hasPrefix . "G-" }}
+    <amp-analytics type="gtag" data-credentials="include">
+      <script type="application/json">
+      {
+        "vars" : {
+          "gtag_id": "{{ . }}",
+          "config" : {
+            "{{ . }}": {
+              "groups": "default",
+              "anonymize_ip": "{{- $pc.AnonymizeIP -}}"
+            }
+          }
+        }
+      }
+      </script>
+    </amp-analytics>
+    {{- else if hasPrefix . "UA-" }}
+    <amp-analytics type="googleanalytics" id="analytics1">
+      <script type="application/json">
+      {
+        "vars": {
+          "account": "{{ . }}"
+        },
+        "triggers": {
+          "trackPageview": {
+            "on": "visible",
+            "request": "pageview"
+          }
+        }
+      }
+      </script>
+    </amp-analytics>
+    {{- end }}
+  {{- end }}
+{{- end -}}
+{{- end -}}

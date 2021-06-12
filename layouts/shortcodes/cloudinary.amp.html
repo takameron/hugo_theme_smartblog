@@ -1,0 +1,41 @@
+{{- $origsrc := .Get "src" | default (.Get 0) -}}
+{{- $w := .Get "w" | default 500 -}}
+{{- $h := .Get "h" | default 375 -}}
+{{- $alt := "" -}}
+{{- $layout := .Get "layout" | default "responsive" -}}
+
+{{- $srcb := findRE "https://res.cloudinary.com/.*?/image/upload/" $origsrc -}}
+{{- $srca := strings.TrimLeft (index $srcb 0) $origsrc -}}
+{{- $params1 := print "f_auto,q_auto,c_limit,w_" $w ",h_" $h -}}
+{{- $params2 := print "f_auto,q_auto,c_limit,w_" (mul $w 2) ",h_" (mul $h 2) -}}
+{{- $src1 := print (index $srcb 0) "/" $params1 "/" $srca -}}
+{{- $src2 := print (index $srcb 0) "/" $params2 "/" $srca -}}
+
+{{- if .Get "alt" -}}
+  {{- $alt = .Get "alt" -}}
+{{- else -}}
+  {{- $alt = .Get "caption" -}}
+{{- end -}}
+
+<figure {{ if .Get "class" }}class="{{ .Get "class" }}"{{ end }}>
+  <a href="{{ $origsrc }}">
+    <amp-img src="{{ $src1 }}"
+      sizes="(min-width: {{ $w }}px) {{ $w }}px, 100vw"
+      srcset="{{ $src1 }} 1x, {{ $src2 }} 2x"
+      alt="{{ $alt }}"
+      width="{{ $w }}"
+      height="{{ $h }}"
+      layout="{{ $layout }}"
+    ></amp-img>
+  </a>
+
+  {{- if .Get "caption" -}}
+  <figcaption>
+    {{- if .Get "href" -}}
+    <a href="{{ .Get "href" }}" target="_blank" rel="noopener" class="icon-new-tab">{{ .Get "caption" }}</a>
+    {{- else -}}
+    {{- .Get "caption" -}}
+    {{- end -}}
+  </figcaption>
+  {{- end -}}
+</figure>

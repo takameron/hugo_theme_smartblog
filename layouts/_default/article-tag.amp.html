@@ -1,0 +1,17 @@
+<article>
+  <a href="{{ .Permalink }}" title="{{ .Title }}" class="article-tag l-flex box">
+    <div class="article-tag-picture">
+      {{- with .Params.images }}
+      {{- range first 1 . }}<amp-img width=100 height=100 class="article-tag-img" src="{{ . | absURL }}" alt="thumbnail"></amp-img>{{- end }}
+      {{- else }}<amp-img width=100 height=100 class="article-tag-img" src="/img/default.png" alt="thumbnail"></amp-img>
+      {{- end }}
+    </div>
+
+    <div class="article-tag-body l-flex l-flex-column">
+      <span class="article-tag-title">{{ .Title }}</span>
+      <div class="article-tag-time l-flex-wrap l-bottom">
+      {{ partial "article/time.html" . }}
+      </div>
+    </div>
+  </a>
+</article>

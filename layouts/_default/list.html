@@ -1,0 +1,16 @@
+{{ define "title" }}{{ .Title }} - {{ .Site.Title }}{{ end }}
+{{ define "main"}}
+<main class="l-main">
+  <article>
+    <header>
+      <h1>{{ .Title }}</h1>
+    </header>
+    {{ .Content }}
+  </article>
+  {{- range .Paginator.Pages }}
+    {{ .Render "article-card" }}
+  {{- end }}
+
+  {{ template "_internal/pagination.html" . }}
+</main>
+{{ end }}

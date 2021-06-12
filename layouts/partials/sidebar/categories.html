@@ -1,0 +1,10 @@
+{{- with .Site.Taxonomies.categories -}}
+<section class="sidebar-item">
+  <h2 class="sidebar-item-title">CATEGORIES</h2>
+  <div class="sidebar-content l-flex l-flex-column">
+  {{- range .ByCount }}
+  <span class="category icon-folder"><a href="{{ .Page.Permalink }}" title="{{ .Page.Title }}">{{ .Page.Title }}</a></span>
+  {{- end }}
+  </div>
+</section>
+{{- end -}}

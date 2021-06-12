@@ -1,0 +1,17 @@
+<amp-twitter
+  data-tweetid="{{ index .Params 0 }}"
+  width="{{ .Get 1 | default 500 }}"
+  height="{{ .Get 2 | default 500 }}"
+  layout="{{ .Get 3 | default "responsive" }}"
+>
+  <!-- https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/shortcodes/twitter.html -->
+  {{- $pc := .Page.Site.Config.Privacy.Twitter }}
+  {{- if not $pc.Disable }}
+  {{- $url := printf "https://api.twitter.com/1/statuses/oembed.json?id=%v&dnt=%t" (index .Params 0) $pc.EnableDNT }}
+  {{- $json := getJSON $url }}
+  {{ $json.html | replaceRE `<blockquote.*?>` `<blockquote placeholder>` | replaceRE `<script.*?>(.|\n)*?</script>` "" | safeHTML }}
+  {{- end }}
+  <div fallback>
+    An error occurred while retrieving the Tweet. It might have been deleted.
+  </div>
+</amp-twitter>

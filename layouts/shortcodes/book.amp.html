@@ -1,0 +1,109 @@
+{{- $isbn10 := 0 -}}
+{{- $isbn13 := 0 -}}
+{{- $isbn := .Get "isbn" | default (.Get 0) -}}
+{{- $len := len $isbn -}}
+
+<!-- https://www.memory-lovers.blog/entry/2019/05/19/070000 -->
+{{- if eq $len 13 -}}
+  {{- $isbn13 = $isbn -}}
+  {{- $base := substr $isbn 3 -1 -}}
+  {{- $sum := 0 -}}
+  {{- range $index, $element := findRE ".{1}" $base -}}
+    {{- $element = int $element -}}
+    {{- $sum = add $sum (mul $element (sub 10 $index)) -}}
+  {{- end -}}
+  {{- $digit := sub 11 (mod $sum 11) -}}
+  {{- if eq $digit 10 -}}
+    {{- $digit = "X" -}}
+  {{- end -}}
+  {{- $isbn10 = print $base $digit -}}
+{{- else if eq $len 10 -}}
+  {{- $isbn10 = $isbn -}}
+  {{- $base := print "978" (substr $isbn 0 -1) -}}
+  {{- $sum := 0 -}}
+  {{- range $index, $element := findRE ".{1}" $base -}}
+    {{- $element = int $element -}}
+    {{- if eq (mod $index 2) 0 -}}
+      {{- $sum = add $sum $index -}}
+    {{- else -}}
+      {{- $sum = add $sum (mul $index 3) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $digit := sub 110 (mod $sum 10) -}}
+  {{- $isbn13 = print $base $digit -}}
+{{- end -}}
+
+{{- $amazon_url := printf "https://www.amazon.co.jp/dp/%s" $isbn10 -}}
+{{- $rakubook_url := print "https://books.rakuten.co.jp/search?isbnJan=" $isbn13 -}}
+{{- $rakuten_url := print "https://search.rakuten.co.jp/search/mall/" $isbn13 "/200162/" -}}
+{{- $seven_url := print "https://7net.omni7.jp/search/?keyword=" $isbn13 -}}
+{{- $honto_url := print "https://honto.jp/netstore/search.html?k=" $isbn13 -}}
+{{- $ehon_url := print "https://www.e-hon.ne.jp/bec/SA/Detail?refISBN=" $isbn10 -}}
+{{- $kino_url := print "https://www.kinokuniya.co.jp/f/dsg-01-" $isbn13 -}}
+{{- $toshokan_url := printf "https://calil.jp/book/%s" $isbn10 -}}
+
+{{- $title := "" -}}
+{{- $image := "" -}}
+{{- $author := "" -}}
+{{- $publisher := "" -}}
+{{- $pubdate := "" -}}
+{{- $description := "" -}}
+{{- $price := "" -}}
+
+{{- $openbdURL := printf "https://api.openbd.jp/v1/get?%s" (querify "isbn" $isbn13 ) -}}
+{{- $openbdJSON := getJSON $openbdURL -}}
+{{- if (index $openbdJSON 0) -}}
+  {{- $data := (index $openbdJSON 0) -}}
+  {{- $title = $data.summary.title -}}
+  {{- $image = $data.summary.cover -}}
+  {{- $author = $data.summary.author -}}
+  {{- $publisher = $data.summary.publisher -}}
+  {{- $pubdate = $data.summary.pubdate -}}
+  {{- if ne $data.onix.CollateralDetail.TextContent nil }}{{ $description = (index $data.onix.CollateralDetail.TextContent 0).Text }}{{ end -}}
+  {{- if ne $data.onix.ProductSupply.SupplyDetail.Price nil }}{{ $price = (index $data.onix.ProductSupply.SupplyDetail.Price 0).PriceAmount }}{{ end -}}
+{{- else -}}
+  {{- $gbooksURL := printf "https://www.googleapis.com/books/v1/volumes?q=isbn:%s" $isbn13 -}}
+  {{- $gbooksJSON := getJSON $gbooksURL -}}
+
+  {{- if ne $gbooksJSON.totalItems 0 -}}
+    {{- $data := (index $gbooksJSON.items 0) -}}
+    {{- $title = $data.volumeInfo.title -}}
+    {{- $image = $data.volumeInfo.imageLinks.smallThumbnail -}}
+    {{- $author = (index $data.volumeInfo.authors 0) -}} {{/*$data.volumeInfo.(index authors 0)*/}}
+    {{- $publisher = "" -}}
+    {{- $pubdate = $data.volumeInfo.publishedDate -}}
+    {{- $description = $data.volumeInfo.description -}}
+    {{- $price = "" -}}
+  {{- else -}}
+    {{- $title = "Not Found" -}}
+  {{- end -}}
+{{- end -}}
+
+{{ $image = replace $image "http://" "https://" }}
+
+<div class="book l-flex box">
+  <div class="book-picture">
+    {{- if ne $image "" -}}
+    <amp-img width=150 height=150 class="book-img" src="{{ $image }}" alt="thumbnail"></amp-img>
+    {{- end -}}
+  </div>
+  <div class="book-body l-flex l-flex-column">
+    <span class="book-title">{{ $title }}</span>
+    <div class="book-detail">
+      {{ $author }}　{{ $publisher }}　{{ $pubdate }}{{ if $price }}　{{ $price }}円＋税{{ end }}<br />
+    </div>
+    <div class="book-description">
+      {{ $description }}
+    </div>
+    <div class="book-links l-flex-wrap l-bottom">
+      <a href="{{ $amazon_url }}" target="_blank" rel="noopener" class="brand-amazon book-shop">Amazon</a>
+      <a href="{{ $rakubook_url }}" target="_blank" rel="noopener" class="brand-rakuten book-shop">楽天ブックス</a>
+      <a href="{{ $rakuten_url }}" target="_blank" rel="noopener" class="brand-rakuten book-shop">楽天市場</a>
+      <a href="{{ $seven_url }}" target="_blank" rel="noopener" class="brand-7net book-shop">7net</a>
+      <a href="{{ $honto_url }}" target="_blank" rel="noopener" class="brand-honto book-shop">honto</a>
+      <a href="{{ $ehon_url }}" target="_blank" rel="noopener" class="brand-ehon book-shop">e-hon</a>
+      <a href="{{ $kino_url }}" target="_blank" rel="noopener" class="brand-kinokuniya book-shop">紀伊國屋書店</a>
+      <a href="{{ $toshokan_url }}" target="_blank" rel="noopener" class="brand-toshokan book-shop">図書館</a>
+    </div>
+  </div>
+</div>

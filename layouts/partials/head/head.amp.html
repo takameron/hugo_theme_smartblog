@@ -1,0 +1,33 @@
+<meta charset="UTF-8">
+{{- range .AlternativeOutputFormats }}
+<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
+{{- end }}
+{{ with .Site.Params.logo }}<link rel="apple-touch-icon" href="{{ . }}">{{ end }}
+{{- $style1 :=  resources.Get "sass/style.scss" | resources.ExecuteAsTemplate "style.scss" . }}
+{{- $style2 :=  resources.Get "sass/_base.scss" }}
+{{- $style3 :=  resources.Get "sass/_layout.scss" }}
+{{- $style4 :=  resources.Get "sass/_module.scss" }}
+{{- $style := slice $style1 $style2 $style3 $style4 | resources.Concat "main.scss" | toCSS | minify }}
+<style amp-custom>
+  {{ replace $style.Content `@charset "UTF-8";` "" | safeCSS }}
+
+  {{- with resources.Get "font.css" | minify }}
+    {{ replace .Content `@charset "UTF-8";` "" | safeCSS }}
+  {{- end }}
+
+  {{- with resources.Get "syntax.css" | minify }}
+    {{ replace .Content `@charset "UTF-8";` "" | safeCSS }}
+  {{- end }}
+</style>
+{{ partial "head/amp-boilerplate.html" }}
+{{ partial "head/external.amp.html" . }}
+
+{{ with .Site.Params.color.primary }}<meta name="theme-color" content="{{ . }}">{{ end }}
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
+{{ hugo.Generator }}
+{{ template "_internal/schema.html" . }}
+{{ template "_internal/opengraph.html" . }}
+{{- template "_internal/twitter_cards.html" . -}}
+{{- partial "head/google_analytics.amp.html" . -}}
+{{- partial "head/site_schema.html" . -}}

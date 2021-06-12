@@ -1,0 +1,10 @@
+{{ define "title" }}{{ .Site.Title }}{{ end }}
+{{ define "main" }}
+<main class="l-main">
+  {{ range .Paginator.Pages }}
+    {{ .Render "article-card" }}
+  {{ end }}
+
+  {{ template "_internal/pagination.html" . }}
+</main>
+{{ end }}

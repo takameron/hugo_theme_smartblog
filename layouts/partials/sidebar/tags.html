@@ -1,0 +1,10 @@
+{{- with .Site.Taxonomies.tags -}}
+<section class="sidebar-item">
+  <h2 class="sidebar-item-title">TAGS</h2>
+  <div class="sidebar-content l-flex-wrap">
+  {{- range .ByCount }}
+  <span class="tag icon-price-tag"><a href="{{ .Page.Permalink }}" title="{{ .Page.Title }}">{{ .Page.Title }}({{ .Count }})</a></span>
+  {{- end }}
+  </div>
+</section>
+{{- end -}}

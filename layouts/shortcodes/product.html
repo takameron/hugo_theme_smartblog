@@ -1,0 +1,31 @@
+<!-- https://weblog10.com/post-4692 -->
+<!-- https://www.ipentec.com/document/internet-get-amazon-product-image -->
+{{- $asin := .Get "asin" -}}
+{{- $title := .Get "title" -}}
+{{- $maker := .Get "maker" -}}
+{{- $kw := .Get "kw" -}}
+
+{{- $page_url := printf "https://www.amazon.co.jp/dp/%s" $asin -}}
+{{- $image_url := printf "https://images-na.ssl-images-amazon.com/images/P/%s.09.MZZZZZZZ" $asin -}}
+{{- $amazon_url := printf "https://www.amazon.co.jp/dp/%s" $asin -}}
+{{- $rakuten_url := printf "https://search.rakuten.co.jp/search/mall/%s" $kw -}}
+{{- $yahoo_url := printf "https://shopping.yahoo.co.jp/search?p=%s" $kw -}}
+{{- $kakaku_url := printf "https://kakaku.com/search_results/%s" $kw -}}
+
+<div class="product l-flex box">
+  <div class="product-picture">
+    <img loading="lazy" width=160 height=160 class="product-img" src="{{ $image_url }}" alt="thumbnail">
+  </div>
+  <div class="product-body l-flex l-flex-column">
+    <span class="product-title">{{ $title }}</span>
+    <div class="product-detail">
+      {{ $maker }}
+    </div>
+    <div class="product-links l-flex-wrap l-bottom">
+      <a href="{{ $amazon_url }}" target="_blank" rel="noopener" class="brand-amazon product-shop">Amazon</a>
+      <a href="{{ $rakuten_url }}" target="_blank" rel="noopener" class="brand-rakuten product-shop">楽天市場</a>
+      <a href="{{ $yahoo_url }}" target="_blank" rel="noopener" class="brand-yahoo product-shop">Yahoo!</a>
+      <a href="{{ $kakaku_url }}" target="_blank" rel="noopener" class="brand-kakaku product-shop">価格.com</a>
+    </div>
+  </div>
+</div>
