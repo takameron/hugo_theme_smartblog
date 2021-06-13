@@ -13,6 +13,27 @@
 
 // ===== Parts =====
 
+.highlight {
+  table{
+    border-collapse: unset;
+    border-spacing: unset;
+    width: unset;
+
+    th {
+      border-bottom: unset;
+    }
+
+    th, td {
+      padding: unset;
+      text-align: unset;
+    }
+
+    tbody > tr:nth-child(odd) {
+      background-color: unset
+    }
+  }
+}
+
 .heading {
   &-link {
     display: none;
