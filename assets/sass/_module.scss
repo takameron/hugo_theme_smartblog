@@ -14,24 +14,30 @@
 // ===== Parts =====
 
 .highlight {
-  table{
-    border-collapse: unset;
-    border-spacing: unset;
+  table {
     width: unset;
+    border-spacing: unset;
+    border-collapse: unset;
 
     th {
       border-bottom: unset;
     }
 
-    th, td {
+    th,
+    td {
       padding: unset;
       text-align: unset;
     }
 
     tbody > tr:nth-child(odd) {
-      background-color: unset
+      background-color: unset;
     }
   }
+}
+
+.video {
+  margin: 10px;
+  text-align: center;
 }
 
 .heading {

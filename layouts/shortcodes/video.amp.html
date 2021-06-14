@@ -16,13 +16,15 @@
   {{- $h = .Get "h" | default 375 -}}
 {{- end -}}
 
-<amp-video controls {{ with (.Get "attributes") }}{{ . }}{{ end }}
-  width="{{ $w }}"
-  height="{{ $h }}"
-  layout="{{ $layout }}"
-  src="{{ $origsrc }}"
-  poster="{{ $poster }}">
-  <div fallback>
-    <p>This browser does not support the video element.</p>
-  </div>
-</amp-video>
+<div class="video">
+  <amp-video controls {{ with (.Get "attributes") }}{{ . }}{{ end }}
+    width="{{ $w }}"
+    height="{{ $h }}"
+    layout="{{ $layout }}"
+    src="{{ $origsrc }}"
+    poster="{{ $poster }}">
+    <div fallback>
+      <p>This browser does not support the video element.</p>
+    </div>
+  </amp-video>
+</div>

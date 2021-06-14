@@ -25,7 +25,7 @@ a {
 }
 
 figure {
-  margin: 0;
+  text-align: center;
 }
 
 figcaption {
@@ -94,21 +94,22 @@ h4 {
   border-left: solid 5px $color-secondary;
 }
 
-table{
-  border-collapse: collapse;
-  border-spacing: 0;
+table {
   width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
 
   th {
     border-bottom: solid 3px #d7d7d7;
   }
 
-  th, td {
+  th,
+  td {
     padding: 10px 0;
     text-align: center;
   }
 
-  tbody > tr:nth-child(odd){
-    background-color: #eee
+  tbody > tr:nth-child(odd) {
+    background-color: #eee;
   }
 }
