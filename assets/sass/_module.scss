@@ -13,6 +13,33 @@
 
 // ===== Parts =====
 
+.highlight {
+  table {
+    width: unset;
+    border-spacing: unset;
+    border-collapse: unset;
+
+    th {
+      border-bottom: unset;
+    }
+
+    th,
+    td {
+      padding: unset;
+      text-align: unset;
+    }
+
+    tbody > tr:nth-child(odd) {
+      background-color: unset;
+    }
+  }
+}
+
+.video {
+  margin: 10px;
+  text-align: center;
+}
+
 .heading {
   &-link {
     display: none;
@@ -134,7 +161,11 @@
   }
 
   &-title {
+    padding: 0 0 0.2em 0;
+    margin: 0;
     font-size: 1rem;
+    background: unset;
+    border: unset;
   }
 
   &-time {
@@ -331,39 +362,39 @@
   }
 
   &-amazon {
-    border: 2px solid #ff9901;
+    background: #ff9901;
   }
 
   &-rakuten {
-    border: 2px solid #bf0000;
+    background: #bf0000;
   }
 
   &-7net {
-    border: 2px solid #008837;
+    background: #008837;
   }
 
   &-honto {
-    border: 2px solid #0085cd;
+    background: #0085cd;
   }
 
   &-ehon {
-    border: 2px solid #006;
+    background: #006;
   }
 
   &-kinokuniya {
-    border: 2px solid #004097;
+    background: #004097;
   }
 
   &-toshokan {
-    border: 2px solid #15b0e7;
+    background: #15b0e7;
   }
 
   &-yahoo {
-    border: 2px solid #f03;
+    background: #f03;
   }
 
   &-kakaku {
-    border: 2px solid #002562;
+    background: #002562;
   }
 }
 

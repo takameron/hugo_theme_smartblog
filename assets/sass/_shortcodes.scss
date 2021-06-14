@@ -52,6 +52,8 @@
 }
 
 .book {
+  padding: 10px;
+
   &-img {
     object-fit: contain;
     margin: 1rem 1rem 0 0;
@@ -78,9 +80,10 @@
   }
 
   &-shop {
-    padding: 0.1rem 0.3rem;
+    padding: 0.3rem;
     margin: 0.2rem;
     font-size: 0.9rem;
+    color: white;
     text-align: center;
     border-radius: 10px;
   }
@@ -108,9 +111,10 @@
   }
 
   &-shop {
-    padding: 0.1rem 0.3rem;
+    padding: 0.3rem;
     margin: 0.2rem;
     font-size: 0.9rem;
+    color: white;
     text-align: center;
     border-radius: 10px;
   }
@@ -118,6 +122,7 @@
 
 .info {
   position: relative;
+  margin: 10px;
   background: #e0f5ff;
   border-left: solid 60px #3ca5d4;
 
@@ -139,6 +144,7 @@
 
 .warning {
   position: relative;
+  margin: 10px;
   background: #faedc4;
   border-left: solid 60px #ffc23e;
 

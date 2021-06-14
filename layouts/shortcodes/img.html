@@ -46,7 +46,9 @@
 <figure {{ if .Get "class" }}class="{{ .Get "class" }}"{{ end }}>
   <a href="{{ $origsrc }}">
     <picture>
+      {{- if ne $resizesrc_webp $resizesrc_orig }}
       <source srcset="{{ $resizesrc_webp }}" type="image/webp">
+      {{- end }}
       <img loading="lazy" width="{{ $w }}" height="{{ $h }}" src="{{ $resizesrc_orig }}" alt="{{ $alt }}">
     </picture>
   </a>

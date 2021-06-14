@@ -14,12 +14,14 @@
   {{- $h = .Get "h" | default 375 -}}
 {{- end -}}
 
-<video controls {{ with (.Get "attributes") }}{{ . }}{{ end }}
-  width="{{ $w }}"
-  height="{{ $h }}"
-  src="{{ $origsrc }}">
-  {{ with .Get "poster" }}poster="{{ .Get "poster" }}"{{ end }}
-  <div fallback>
-    <p>This browser does not support the video element.</p>
-  </div>
-</video>
+<div class="video">
+  <video controls {{ with (.Get "attributes") }}{{ . }}{{ end }}
+    width="{{ $w }}"
+    height="{{ $h }}"
+    src="{{ $origsrc }}">
+    {{ with .Get "poster" }}poster="{{ .Get "poster" }}"{{ end }}
+    <div fallback>
+      <p>This browser does not support the video element.</p>
+    </div>
+  </video>
+</div>

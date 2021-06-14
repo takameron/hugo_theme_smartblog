@@ -46,6 +46,7 @@
 
 <figure {{ if .Get "class" }}class="{{ .Get "class" }}"{{ end }}>
   <a href="{{ $origsrc }}">
+    {{- if ne $resizesrc_webp $resizesrc_orig }}
     <amp-img
       alt="{{ $alt }}"
       width="{{ $w }}"
@@ -53,6 +54,7 @@
       layout="{{ $layout }}"
       src="{{ $resizesrc_webp }}"
     >
+    {{- end }}
       <amp-img
         alt="{{ $alt }}"
         fallback
@@ -61,7 +63,9 @@
         layout="{{ $layout }}"
         src="{{ $resizesrc_orig }}"
       ></amp-img>
+    {{- if ne $resizesrc_webp $resizesrc_orig }}
     </amp-img>
+    {{- end }}
   </a>
 
   {{- if .Get "caption" -}}
