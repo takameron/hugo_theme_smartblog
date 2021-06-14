@@ -82,11 +82,11 @@
 {{ $image = replace $image "http://" "https://" }}
 
 <div class="book l-flex box">
+  {{- if ne $image "" -}}
   <div class="book-picture">
-    {{- if ne $image "" -}}
     <amp-img width=150 height=150 class="book-img" src="{{ $image }}" alt="thumbnail"></amp-img>
-    {{- end -}}
   </div>
+  {{- end -}}
   <div class="book-body l-flex l-flex-column">
     <span class="book-title">{{ $title }}</span>
     <div class="book-detail">
