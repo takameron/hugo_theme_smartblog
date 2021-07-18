@@ -16,8 +16,8 @@
   {{- if or (.Get "w") (.Get "h" ) -}}
     {{- $size = print $w "x" $h -}}
   {{- else -}}
-    {{- if gt $original.Width 500 -}}
-      {{- $size = "500x" -}}
+    {{- if gt $original.Width 600 -}}
+      {{- $size = "600x" -}}
     {{- else -}}
       {{- $size = print $original.Width "x" -}}
     {{- end -}}
@@ -34,8 +34,8 @@
   {{- $origsrc = $src -}}
   {{- $resizesrc_orig = $src -}}
   {{- $resizesrc_webp = $src -}}
-  {{- $w = .Get "w" | default 500 -}}
-  {{- $h = .Get "h" | default 375 -}}
+  {{- $w = .Get "w" | default 600 -}}
+  {{- $h = .Get "h" | default 450 -}}
 {{- end -}}
 
 {{- if .Get "alt" -}}
