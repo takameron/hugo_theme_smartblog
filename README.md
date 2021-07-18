@@ -112,22 +112,11 @@ It is for blogs and has various functions.
     Then edit the created file.
 
 1. Start the hugo server and check the website.  
-    Command prompt
     ```
-    (set HUGO_ENV=DEV) && hugo server -D -F
-    ```
-
-    PowerShell
-    ```
-    $env:HUGO_ENV="DEV"; hugo server -D -F
+    hugo server -D -F
     ```
 
-    Mac, Linux
-    ```
-    env HUGO_ENV="DEV" hugo server -D -F
-    ```
-
-    Analytics code is not loaded when the `HUGO_ENV` environment variable is `DEV`.
+    To include the Google Analytics code, please use `hugo server -D -F --environment production`.
 
 ## Dependencies
 * I am using the following icon files via [IcoMoon](https://icomoon.io/).

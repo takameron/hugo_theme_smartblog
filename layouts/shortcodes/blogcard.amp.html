@@ -15,8 +15,6 @@
     {{- $title = $metajson.title -}}
   {{- else if $metajson.og_title -}}
     {{- $title = $metajson.og_title -}}
-  {{- else if $metajson.title -}}
-    {{- $title = $metajson.title -}}
   {{- else -}}
     {{- $title = $url -}}
   {{- end -}}

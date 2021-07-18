@@ -30,5 +30,8 @@
 {{ hugo.Generator }}
 {{ template "_internal/opengraph.html" . }}
 {{- template "_internal/twitter_cards.html" . -}}
-{{- partial "head/google_analytics.amp.html" . -}}
 {{- partial "head/site_schema.html" . -}}
+
+{{- if and .Site.GoogleAnalytics hugo.IsProduction }}
+{{- partial "head/google_analytics.amp.html" . -}}
+{{- end }}

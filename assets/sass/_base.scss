@@ -17,10 +17,10 @@ code {
 
 a {
   color: $color-link;
-  text-decoration: underline;
+  text-decoration: none;
 
   &:hover {
-    text-decoration: none;
+    text-decoration: underline;
   }
 }
 
@@ -112,4 +112,8 @@ table {
   tbody > tr:nth-child(odd) {
     background-color: #eee;
   }
+}
+
+ul {
+  padding-left: 20px;
 }
