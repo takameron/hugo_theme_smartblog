@@ -43,7 +43,6 @@
 .heading {
   &-link {
     display: none;
-    text-decoration: none;
   }
 
   &:hover {
@@ -52,6 +51,7 @@
       padding: 1em;
       margin-left: -3em;
       color: unset;
+      text-decoration: none;
     }
   }
 }
@@ -93,8 +93,6 @@
 }
 
 .article-card {
-  text-decoration: none;
-
   &-picture {
     width: 267px;
     height: 150px;
@@ -132,6 +130,8 @@
   }
 
   &:hover {
+    text-decoration: none;
+
     .article-card-img {
       transition-duration: 0.3s;
       transform: scale(1.2);
@@ -140,8 +140,6 @@
 }
 
 .article-tag {
-  text-decoration: none;
-
   &-img {
     object-fit: cover;
     transition-duration: 0.3s;
@@ -175,6 +173,8 @@
   }
 
   &:hover {
+    text-decoration: none;
+
     .article-tag-img {
       transition-duration: 0.3s;
       transform: scale(1.2);
@@ -257,8 +257,9 @@
 
       // toc icon
       &::before {
-        padding: 0.5rem;
+        padding: 1rem;
         margin-right: 1rem;
+        font-size: 20px;
         color: white;
         background-color: $color-secondary;
         border-radius: 50%;
@@ -296,6 +297,7 @@
   &-content {
     > p > code {
       padding: 0.2rem;
+      color: red;
       background-color: #e3e3e3;
     }
   }
@@ -445,9 +447,16 @@
     }
   }
 
+  &-archives {
+    ul {
+      padding-left: 50px;
+      margin-top: 0;
+    }
+  }
+
   &-toc {
     position: sticky;
-    top: 0;
+    top: 20px;
 
     &-content {
       max-height: 80vh;
