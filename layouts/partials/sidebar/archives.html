@@ -2,18 +2,18 @@
   <h2 class="sidebar-item-title">ARCHIVES</h2>
   <div class="sidebar-content">
   {{- $site := .Site }}
-  {{- range sort $site.Taxonomies.archives "value" "asc" }}
-  {{- $parent := .Page.Title }}
-  {{- if not (in $parent "-") }}
+  {{- range $parent := $site.Taxonomies.archives.Alphabetical.Reverse }}
+  {{- $namep := .Name }}
+  {{- if not (in $namep "-") }}
   <details>
     <summary class="archive-year">
-      <span class="archive"><a href="{{ .Page.Permalink }}" title="{{ $parent }}">{{ $parent }}({{ .Count }})</a></span>
+      <span class="archive"><a href="{{ .Page.Permalink }}" title="{{ $namep }}">{{ $namep }}({{ .Count }})</a></span>
     </summary>
     <ul>
-      {{- range sort $site.Taxonomies.archives "value" "asc" }}
-      {{- $child := .Page.Title }}
-      {{- if and (in $child $parent) (ne $child $parent) }}
-      <li><span class="archive"><a href="{{ .Page.Permalink }}" title="{{ $child }}">{{ $child }}({{ .Count }})</a></span></li>
+      {{- range $child := $site.Taxonomies.archives.Alphabetical.Reverse }}
+      {{- $namec := .Name }}
+      {{- if and (in $namec $namep) (ne $namec $namep) }}
+      <li><span class="archive"><a href="{{ .Page.Permalink }}" title="{{ $namec }}">{{ $namec }}({{ .Count }})</a></span></li>
       {{- end }}
       {{- end }}
     </ul>
