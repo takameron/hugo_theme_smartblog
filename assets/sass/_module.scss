@@ -295,10 +295,12 @@
   }
 
   &-content {
-    > p > code {
-      padding: 0.2rem;
-      color: red;
-      background-color: #e3e3e3;
+    p, li {
+      > code {
+        padding: 0.2rem;
+        color: red;
+        background-color: #e3e3e3;
+      }
     }
   }
 
