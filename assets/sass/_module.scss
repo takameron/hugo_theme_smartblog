@@ -94,7 +94,8 @@
 
 .article-card {
   &-picture {
-    width: 267px;
+    width: 50%;
+    max-width: 267px;
     height: 150px;
     overflow: hidden;
   }
@@ -107,7 +108,6 @@
 
   &-body {
     flex: 1;
-    min-width: 240px;
     padding: 0.5rem;
     font-size: small;
     color: $color-primary-text;
@@ -123,10 +123,19 @@
   &-summary {
     font-size: 0.8rem;
     line-height: 1rem;
+
+    @include max-screen($breakpoint-mobile) {
+      height: 0;
+      visibility: hidden;
+    }
   }
 
   &-time {
     font-weight: normal;
+
+    @include max-screen($breakpoint-mobile) {
+      line-height: 1em;
+    }
   }
 
   &:hover {
