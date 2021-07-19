@@ -5,10 +5,10 @@
     "@context": "http://schema.org",
     "@type": "WebSite",
     "name": "{{ .Site.Title }}",
-    "url": "{{ .Site.BaseURL }}",
+    "url": {{ .Site.BaseURL }},
     "description": "{{ .Site.Params.description }}",
-    "thumbnailUrl": "{{ .Site.Params.Logo | absURL }}",
-    "license": "{{ .Site.Params.Copyright }}"
+    "thumbnailUrl": {{ .Site.Params.Logo | absURL }},
+    "license": {{ .Site.Params.Copyright | safeHTML }}
 }
 </script>
 {{ else if .IsPage }}
@@ -27,7 +27,7 @@
     "isFamilyFriendly": "true",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "{{ .Permalink }}"
+        "@id": {{ .Permalink }}
     },
     "author" : {
         "@type": "Person",
@@ -52,13 +52,13 @@
         "url": {{ .Site.BaseURL }},
         "logo": {
             "@type": "ImageObject",
-            "url": "{{ .Site.Params.logo | absURL }}",
+            "url": {{ .Site.Params.logo | absURL }},
             "width":"32",
             "height":"32"
         }
     },
     "image": {{ if .Params.images }}[{{ range $i, $e := .Params.images }}{{ if $i }}, {{ end }}{{ $e | absURL }}{{ end }}]{{ else}}{{.Site.Params.logo | absURL }}{{ end }},
-    "url" : "{{ .Permalink }}",
+    "url" : {{ .Permalink }},
     "wordCount" : "{{ .WordCount }}",
     "genre" : [ {{ range $index, $tag := .Params.tags }}{{ if $index }}, {{ end }}"{{ $tag }}" {{ end }}],
     "keywords" : [ {{ range $index, $keyword := .Params.keywords }}{{ if $index }}, {{ end }}"{{ $keyword }}" {{ end }}]
