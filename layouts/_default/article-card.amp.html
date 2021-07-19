@@ -1,8 +1,54 @@
+{{- $w := 267 -}}
+{{- $h := 150 -}}
+
+{{- $src1 := "" -}}
+{{- $src2 := "" -}}
+{{- $src3 := "" -}}
+
+{{- if .Params.images -}}
+  {{- $src := index .Params.images 0 -}}
+
+  {{- if strings.HasPrefix $src "https://res.cloudinary.com/" -}}
+    {{- $srcb := findRE "https://res.cloudinary.com/.*?/image/upload" $src -}}
+    {{- $srca := strings.TrimLeft (index $srcb 0) $src -}}
+
+    {{- $size1 := print "c_limit,w_" (mul $w 1) ",h_" (mul $h 1) -}}
+    {{- $size2 := print "c_limit,w_" (mul $w 2) ",h_" (mul $h 2) -}}
+    {{- $size3 := print "c_limit,w_" (mul $w 3) ",h_" (mul $h 3) -}}
+    {{- $src1 = print (index $srcb 0) "/" "f_auto,q_auto," $size1 "/" $srca -}}
+    {{- $src2 = print (index $srcb 0) "/" "f_auto,q_auto," $size2 "/" $srca -}}
+    {{- $src3 = print (index $srcb 0) "/" "f_auto,q_auto," $size3 "/" $srca -}}
+  {{- else -}}
+    {{- $original := .Resources.GetMatch $src -}}
+    {{- if $original -}}
+      {{- $resized1 := $original.Resize (print (mul $w 1) "x" (mul $h 1) " q90 webp") -}}
+      {{- $resized2 := $original.Resize (print (mul $w 2) "x" (mul $h 2) " q90 webp") -}}
+      {{- $resized3 := $original.Resize (print (mul $w 3) "x" (mul $h 3) " q90 webp") -}}
+
+      {{- $src1 = $resized1.RelPermalink -}}
+      {{- $src2 = $resized2.RelPermalink -}}
+      {{- $src3 = $resized3.RelPermalink -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
 <article>
   <a href="{{ .Permalink }}" title="{{ .Title }}" class="article-card l-flex l-flex-wrap box">
     <div class="article-card-picture">
       {{- with .Params.images }}
-      {{- range first 1 . }}<amp-img width=267 height=150 class="article-card-img" src="{{ . | absURL }}" alt="thumbnail"></amp-img>{{- end }}
+      {{- range first 1 . }}
+      <amp-img
+        width=267
+        height=150
+        class="article-card-img"
+        src="{{ . | absURL }}"
+        srcset="
+            {{- with $src1 }} {{ $src1 }} {{ mul $w 1 }}w{{ end -}}
+            {{- with $src2 }},{{ $src2 }} {{ mul $w 2 }}w{{ end -}}
+            {{- with $src3 }},{{ $src3 }} {{ mul $w 3 }}w{{ end -}}
+            "
+        alt="thumbnail"></amp-img>
+      {{- end }}
       {{- else }}<amp-img width=267 height=150 class="article-card-img" src="/img/default.png" alt="thumbnail"></amp-img>
       {{- end }}
     </div>
