@@ -295,7 +295,8 @@
   }
 
   &-content {
-    p, li {
+    p,
+    li {
       > code {
         padding: 0.2rem;
         color: red;
