@@ -249,7 +249,7 @@
   }
 
   &-toc {
-    padding: 2em;
+    padding: 1em 2em;
     margin: 2em 0;
     background: #f9f9f9;
     border-top: solid 10px $color-secondary;
@@ -261,6 +261,7 @@
     &-title {
       position: relative;
       display: block;
+      padding: 1rem 0;
       font-size: 2rem;
       cursor: pointer;
 
@@ -291,6 +292,7 @@
 
     &-content {
       height: 0;
+      margin-left: 20px;
       visibility: hidden;
       opacity: 0;
       transition: 0.5s;
