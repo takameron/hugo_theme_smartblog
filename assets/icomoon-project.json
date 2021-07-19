@@ -1,8 +1,8 @@
 {
   "metadata": {
     "name": "icomoon-project",
-    "lastOpened": 1623316492344,
-    "created": 1623316477816
+    "lastOpened": 0,
+    "created": 1626703681304
   },
   "iconSets": [
     {
@@ -21720,8 +21720,11 @@
         {
           "ligatures": "feed3, rss2",
           "name": "rss2",
-          "order": 0,
-          "id": 413
+          "order": 21,
+          "id": 413,
+          "prevSize": 32,
+          "code": 60060,
+          "tempChar": ""
         },
         {
           "ligatures": "youtube, brand21",
@@ -29713,12 +29716,12 @@
       "useClassSelector": true,
       "color": 0,
       "bgColor": 16777215,
-      "classSelector": ".icon"
+      "classSelector": ".icon",
+      "name": "icomoon"
     },
     "historySize": 50,
     "showCodes": true,
     "gridSize": 16
   },
-  "uid": -1,
-  "time": 1623316760532
+  "uid": -1
 }

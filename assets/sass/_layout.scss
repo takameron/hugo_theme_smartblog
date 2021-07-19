@@ -50,7 +50,7 @@ $breakpoint-mobile: 800px;
 }
 
 .l-main {
-  width: $width-main;
+  max-width: $width-main;
   margin: 5%;
 
   @include max-screen($breakpoint-mobile) {
@@ -59,7 +59,7 @@ $breakpoint-mobile: 800px;
 }
 
 .l-sidebar {
-  width: $width-sidebar;
+  max-width: $width-sidebar;
   margin: 5%;
 
   @include min-screen($breakpoint-mobile) {

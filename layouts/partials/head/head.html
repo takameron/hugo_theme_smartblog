@@ -14,7 +14,7 @@
 {{- with resources.Get "font.css" | toCSS | minify | fingerprint }}
 <link rel="stylesheet" href="{{ .Permalink }}" integrity="{{ .Data.Integrity }}" media="print" onload="this.media='all'; this.onload=null;">
 <noscript><link rel="stylesheet" href="{{ .Permalink }}" integrity="{{ .Data.Integrity }}"></noscript>
-<link rel="preload" href="/fonts/icomoon.ttf?9ton9s" type="font/ttf" as="font" crossorigin>
+<link rel="preload" href="/fonts/icomoon.ttf?g7tgiu" type="font/ttf" as="font" crossorigin>
 {{- end }}
 {{- with resources.Get "syntax.css" | toCSS | minify | fingerprint }}
 <link rel="stylesheet" href="{{ .Permalink }}" integrity="{{ .Data.Integrity }}" media="print" onload="this.media='all'; this.onload=null;">
