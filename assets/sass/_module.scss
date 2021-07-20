@@ -240,10 +240,12 @@
 .single {
   &-title {
     font-size: xx-large;
+    line-height: 1em;
   }
 
   &-thumb {
     max-width: 100%;
+    height: auto;
     margin-top: 2rem;
     object-fit: cover;
   }
@@ -471,6 +473,12 @@
   &-toc {
     position: sticky;
     top: 20px;
+
+    @include max-screen($breakpoint-mobile) {
+      height: 0;
+      overflow: hidden;
+      visibility: hidden;
+    }
 
     &-content {
       max-height: 80vh;

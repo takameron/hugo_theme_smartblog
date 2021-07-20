@@ -8,7 +8,7 @@ $color-link: {{ .Site.Params.color.link | default "#1b94e0" }} !default;
 
 $width-container: 1100px;
 $width-main: 640px;
-$width-sidebar: 300px;
+// $width-sidebar: 300px;
 
 // @import "base";
 // @import "layout";

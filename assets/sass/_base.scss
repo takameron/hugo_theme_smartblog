@@ -27,6 +27,16 @@ a {
 figure {
   margin: 20px 0;
   text-align: center;
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+video {
+  max-width: 100%;
+  height: auto;
 }
 
 figcaption {
