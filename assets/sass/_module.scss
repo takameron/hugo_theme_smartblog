@@ -240,10 +240,12 @@
 .single {
   &-title {
     font-size: xx-large;
+    line-height: 1em;
   }
 
   &-thumb {
     max-width: 100%;
+    height: auto;
     margin-top: 2rem;
     object-fit: cover;
   }
@@ -428,6 +430,19 @@
     }
   }
 
+  &-rss {
+    font-size: 20px;
+    text-align: center;
+
+    > a {
+      &::before {
+        padding-right: 0.3rem;
+      }
+
+      color: $color-primary-text;
+    }
+  }
+
   &-author {
     &-img {
       object-fit: contain;
@@ -471,6 +486,12 @@
   &-toc {
     position: sticky;
     top: 20px;
+
+    @include max-screen($breakpoint-mobile) {
+      height: 0;
+      overflow: hidden;
+      visibility: hidden;
+    }
 
     &-content {
       max-height: 80vh;
