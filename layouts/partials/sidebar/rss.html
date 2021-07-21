@@ -1,0 +1,5 @@
+{{ with .OutputFormats.Get "rss" -}}
+<section class="sidebar-item sidebar-rss">
+  {{ printf `<a rel="%s" type="%s" href="%s" class="icon-rss2">RSS</a>` .Rel .MediaType.Type .Permalink | safeHTML }}
+</section>
+{{ end -}}
