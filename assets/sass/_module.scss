@@ -124,7 +124,7 @@
     font-size: 0.8rem;
     line-height: 1rem;
 
-    @include max-screen($breakpoint-mobile) {
+    @include max-screen($breakpoint-tablet) {
       height: 0;
       visibility: hidden;
     }
@@ -133,7 +133,7 @@
   &-time {
     font-weight: normal;
 
-    @include max-screen($breakpoint-mobile) {
+    @include max-screen($breakpoint-tablet) {
       line-height: 1em;
     }
   }
@@ -343,7 +343,7 @@
     &-related-tag {
       width: 48%;
 
-      @include max-screen($breakpoint-mobile) {
+      @include max-screen($breakpoint-tablet) {
         width: 100%;
       }
     }
@@ -487,7 +487,7 @@
     position: sticky;
     top: 20px;
 
-    @include max-screen($breakpoint-mobile) {
+    @include max-screen($breakpoint-tablet) {
       height: 0;
       overflow: hidden;
       visibility: hidden;
