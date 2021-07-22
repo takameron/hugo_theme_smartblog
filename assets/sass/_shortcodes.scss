@@ -10,6 +10,12 @@
     width: 150px;
     height: 150px;
     overflow: hidden;
+
+    @include max-screen($breakpoint-mobile) {
+      width: 0;
+      height: 0;
+      visibility: hidden;
+    }
   }
 
   &-body {
@@ -33,11 +39,13 @@
 }
 
 .download {
-  height: 150px;
-
   .icon-download3 {
     margin: 1rem;
     font-size: 120px;
+
+    @include max-screen($breakpoint-mobile) {
+      font-size: 60px;
+    }
   }
 
   &-title {
@@ -54,15 +62,17 @@
 .book {
   padding: 10px;
 
+  @include max-screen($breakpoint-mobile) {
+    flex-flow: column;
+  }
+
   &-img {
     object-fit: contain;
     margin: 1rem 1rem 0 0;
   }
 
   &-picture {
-    position: relative;
     width: 150px;
-    height: 150px;
   }
 
   &-title {
@@ -92,14 +102,16 @@
 .product {
   padding: 10px;
 
+  @include max-screen($breakpoint-mobile) {
+    flex-flow: column;
+  }
+
   &-img {
     object-fit: contain;
   }
 
   &-picture {
-    position: relative;
     width: 160px;
-    height: 160px;
   }
 
   &-title {
