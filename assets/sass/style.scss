@@ -3,7 +3,7 @@ $color-primary: {{ .Site.Params.color.primary | default "black" }} !default;
 $color-primary-text: {{ .Site.Params.color.primarytext | default "#333" }} !default;
 $color-headerfooter-text: {{ .Site.Params.color.headerfootertext | default "white" }} !default;
 $color-secondary: {{ .Site.Params.color.secondary | default "#5989cf" }} !default;
-$color-link: {{ .Site.Params.color.link | default "#1b94e0" }} !default;
+$color-link: {{ .Site.Params.color.link | default "blue" }} !default;
 /* stylelint-enable */
 
 $width-container: 1100px;
