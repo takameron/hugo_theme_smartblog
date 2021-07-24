@@ -1,14 +1,33 @@
 /* stylelint-disable */
-$color-primary: {{ .Site.Params.color.primary | default "black" }} !default;
-$color-primary-text: {{ .Site.Params.color.primarytext | default "#333" }} !default;
-$color-headerfooter-text: {{ .Site.Params.color.headerfootertext | default "white" }} !default;
-$color-secondary: {{ .Site.Params.color.secondary | default "#5989cf" }} !default;
-$color-link: {{ .Site.Params.color.link | default "blue" }} !default;
+:root{
+  @media (prefers-color-scheme: light) {
+    --color-base: {{ .Site.Params.color.light.base | default "#FFF" }};
+    --color-text: {{ .Site.Params.color.light.text | default "#333" }};
+    --color-primary: {{ .Site.Params.color.light.primary | default "black" }};
+    --color-secondary: {{ .Site.Params.color.light.secondary | default "#5989cf" }};
+    --color-headerfooter: {{ .Site.Params.color.light.headerfooter | default "white" }};
+    --color-link: {{ .Site.Params.color.light.link | default "blue" }};
+  }
+  @media (prefers-color-scheme: dark) {
+    --color-base: {{ .Site.Params.color.dark.base | default "#333" }};
+    --color-text: {{ .Site.Params.color.dark.text | default "#e4e4e4" }};
+    --color-primary: {{ .Site.Params.color.dark.primary | default "black" }};
+    --color-secondary: {{ .Site.Params.color.dark.secondary | default "#5989cf" }};
+    --color-headerfooter: {{ .Site.Params.color.dark.headerfooter | default "white" }};
+    --color-link: {{ .Site.Params.color.dark.link | default "#3495eb" }};
+  }
+}
 /* stylelint-enable */
 
-$width-container: 1100px;
-$width-main: 640px;
-// $width-sidebar: 300px;
+$COLOR_BASE: var(--color-base);
+$COLOR_TEXT: var(--color-text);
+$COLOR_PRIMARY: var(--color-primary);
+$COLOR_SECONDARY: var(--color-secondary);
+$COLOR_HEADERFOOTER: var(--color-headerfooter);
+$COLOR_LINK: var(--color-link);
+
+$WIDTH-CONTAINER: 1100px;
+$WIDTH-MAIN: 640px;
 
 // @import "base";
 // @import "layout";

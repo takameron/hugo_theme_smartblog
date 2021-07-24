@@ -64,7 +64,7 @@
   }
 
   > a {
-    color: $color-primary-text;
+    color: $COLOR-TEXT;
   }
 }
 
@@ -76,19 +76,19 @@
   }
 
   > a {
-    color: $color-primary-text;
+    color: $COLOR-TEXT;
   }
 }
 
 .toc {
   a {
-    color: $color-primary-text;
+    color: $COLOR-TEXT;
   }
 }
 
 .archive {
   > a {
-    color: $color-primary-text;
+    color: $COLOR-TEXT;
   }
 }
 
@@ -110,7 +110,7 @@
     flex: 1;
     padding: 0.5rem;
     font-size: small;
-    color: $color-primary-text;
+    color: $COLOR_TEXT;
   }
 
   &-title {
@@ -164,7 +164,7 @@
   &-body {
     flex: 1;
     padding: 0.5rem;
-    color: $color-primary-text;
+    color: $COLOR-TEXT;
   }
 
   &-title {
@@ -195,12 +195,12 @@
 
 .site-header,
 .site-footer {
-  color: $color-headerfooter-text;
+  color: $COLOR_HEADERFOOTER;
   text-align: center;
-  background-color: $color-primary;
+  background-color: $COLOR-PRIMARY;
 
   a {
-    color: $color-headerfooter-text;
+    color: $COLOR_HEADERFOOTER;
   }
 }
 
@@ -254,7 +254,11 @@
     padding: 1em 2em;
     margin: 2em 0;
     background: #f9f9f9;
-    border-top: solid 10px $color-secondary;
+    border-top: solid 10px $COLOR-SECONDARY;
+
+    @media (prefers-color-scheme: dark) {
+      background: #444;
+    }
 
     &-check {
       display: none;
@@ -273,7 +277,7 @@
         margin-right: 1rem;
         font-size: 20px;
         color: white;
-        background-color: $color-secondary;
+        background-color: $COLOR-SECONDARY;
         border-radius: 50%;
       }
 
@@ -425,7 +429,7 @@
       margin: 0 0 1rem 0;
       text-align: center;
       background: unset;
-      border-bottom: solid 5px $color-primary;
+      border-bottom: solid 5px $COLOR-PRIMARY;
       border-left: unset;
     }
   }
@@ -439,7 +443,7 @@
         padding-right: 0.3rem;
       }
 
-      color: $color-primary-text;
+      color: $COLOR-TEXT;
     }
   }
 
@@ -527,8 +531,8 @@
 
   > .active {
     > a {
-      color: $color-headerfooter-text;
-      background: $color-primary;
+      color: $COLOR_HEADERFOOTER;
+      background: $COLOR-PRIMARY;
     }
   }
 

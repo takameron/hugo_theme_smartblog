@@ -42,7 +42,7 @@ $breakpoint-mobile: 550px;
 }
 
 .l-container {
-  max-width: $width-container;
+  max-width: $WIDTH-CONTAINER;
   margin: 0 auto;
 
   @include max-screen($breakpoint-tablet) {
@@ -52,7 +52,7 @@ $breakpoint-mobile: 550px;
 
 .l-main {
   flex-basis: 70%;
-  max-width: $width-main;
+  max-width: $WIDTH-MAIN;
   margin: 5%;
 
   @include max-screen($breakpoint-tablet) {
