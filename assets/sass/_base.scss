@@ -100,9 +100,13 @@ blockquote {
 h2 {
   padding: 0.5em 0.5em;
   font-size: 1.7em;
-  background: #555;
+  background: #f4f4f4;
   border-bottom: solid 3px #d7d7d7;
   border-left: solid 5px $COLOR-SECONDARY;
+
+  @media (prefers-color-scheme: dark) {
+    background: #555;
+  }
 }
 
 h3 {
