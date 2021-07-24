@@ -21,7 +21,7 @@
   &-body {
     flex: 1;
     padding: 0.5rem;
-    color: $color-primary-text;
+    color: $COLOR-TEXT;
   }
 
   &-title {
@@ -140,6 +140,10 @@
   background: #e0f5ff;
   border-left: solid 60px #3ca5d4;
 
+  @media (prefers-color-scheme: dark) {
+    background: rgba(111, 120, 125, 0.5);
+  }
+
   .icon-info {
     position: absolute;
     top: 50%;
@@ -161,6 +165,10 @@
   margin: 10px;
   background: #faedc4;
   border-left: solid 60px #ffc23e;
+
+  @media (prefers-color-scheme: dark) {
+    background: rgba(145, 138, 114, 0.5);
+  }
 
   .icon-warning {
     position: absolute;
