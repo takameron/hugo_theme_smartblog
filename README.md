@@ -49,6 +49,7 @@ It is for blogs and has various functions.
     #GoogleAnalytics = "UA-12345-6"
     #disqusShortname = "yourdiscussshortname"
     ignoreErrors = ["error-remote-getjson"]
+    timeout = 30000
 
     [Author]
       name = "writer name"
@@ -71,11 +72,21 @@ It is for blogs and has various functions.
         github = "author_github"
 
     [params.color]
-      primary = "black"
-      primarytext = "#333"
-      headerfootertext = "white"
-      secondary = "#5989cf"
-      link = "blue"
+      [params.color.light]
+        base = "#FFF"
+        text = "#333"
+        primary = "black"
+        secondary = "#5989cf"
+        headerfooter = "white"
+        link = "blue"
+
+      [params.color.dark]
+        base = "#333"
+        text = "#e4e4e4"
+        primary = "black"
+        secondary = "#5989cf"
+        headerfooter = "white"
+        link = "#3495eb"
 
     [taxonomies]
       tag = "tags"
@@ -157,8 +168,8 @@ This is for Japan.
 | Attributes | Info                                                            | Key | Order | Default Value | Required | 
 | ---------- | --------------------------------------------------------------- | --- | ----- | ------------- | -------- | 
 | src        | URL of the image.                                               | src | 0     |               | o        | 
-| width      | image width                                                     | w   |       | 500           |          | 
-| height     | image height                                                    | h   |       | 375           |          | 
+| width      | image width                                                     | w   |       | 600           |          | 
+| height     | image height                                                    | h   |       |               |          | 
 | alt        | alternative text(If `alt` is empty, `caption` will be used instead) | alt     |       |               |          | 
 | caption    | caption                                                         | caption |       |               |          | 
 | href       | URL of the caption link                                         | href    |       |               |          | 
@@ -196,8 +207,8 @@ example : https://gist.github.com/takameron/d4ef18e5c6e51453e4d8a5184e723904
 | Attributes | Info                                                            | Key     | Order | Default Value | Required | 
 | ---------- | --------------------------------------------------------------- | ------- | ----- | ------------- | -------- | 
 | src        | URL of the image.                                               | src     | 0     |               | o        | 
-| width      | image width                                                     | w       |       | 500           |          | 
-| height     | image height                                                    | h       |       | 375           |          | 
+| width      | image width                                                     | w       |       | 600           |          | 
+| height     | image height                                                    | h       |       | 450           |          | 
 | alt        | alternative text(If `alt` is empty, `caption` will be used instead) | alt     |       |               |          | 
 | caption    | caption                                                         | caption |       |               |          | 
 | href       | URL of the caption link                                         | href    |       |               |          | 
@@ -260,8 +271,8 @@ example : https://twitter.com/Twitter/status/1390725076996268038
 | Attributes | Info              | Key    | Order | Default Value | Required | 
 | ---------- | ----------------- | ------ | ----- | ------------- | -------- | 
 | src        | URL of the video. | src    | 0     |               | o        | 
-| width      | width             | w      |       | 500           |          | 
-| height     | height            | h      |       | 375           |          | 
+| width      | width             | w      |       | 600           |          | 
+| height     | height            | h      |       | 450           |          | 
 | poster     | hint image        | poster |       | responsive    |          | 
 
 ### warning
