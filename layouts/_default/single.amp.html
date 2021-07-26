@@ -16,17 +16,17 @@
 
   {{- if strings.HasPrefix $src "https://res.cloudinary.com/" -}}
     {{- $srcb := findRE "https://res.cloudinary.com/.*?/image/upload" $src -}}
-    {{- $srca := strings.TrimLeft (index $srcb 0) $src -}}
+    {{- $srca := strings.TrimPrefix (index $srcb 0) $src -}}
 
     {{- $size1 := print "c_limit,w_" (mul $w 1) -}}
     {{- $size2 := print "c_limit,w_" (mul $w 2) -}}
     {{- $size3 := print "c_limit,w_" (mul $w 3) -}}
-    {{- $src1 = print (index $srcb 0) "/" "f_auto,q_auto," $size1 "/" $srca -}}
-    {{- $src2 = print (index $srcb 0) "/" "f_auto,q_auto," $size2 "/" $srca -}}
-    {{- $src3 = print (index $srcb 0) "/" "f_auto,q_auto," $size3 "/" $srca -}}
-    {{- $info1 := getJSON (print (index $srcb 0) "/" "f_auto,q_auto," $size1 "/fl_getinfo/" $srca) -}}
-    {{- $info2 := getJSON (print (index $srcb 0) "/" "f_auto,q_auto," $size1 "/fl_getinfo/" $srca) -}}
-    {{- $info3 := getJSON (print (index $srcb 0) "/" "f_auto,q_auto," $size1 "/fl_getinfo/" $srca) -}}
+    {{- $src1 = print (index $srcb 0) "/" "f_auto,q_auto," $size1 $srca -}}
+    {{- $src2 = print (index $srcb 0) "/" "f_auto,q_auto," $size2 $srca -}}
+    {{- $src3 = print (index $srcb 0) "/" "f_auto,q_auto," $size3 $srca -}}
+    {{- $info1 := getJSON (print (index $srcb 0) "/" "f_auto,q_auto," $size1 "/fl_getinfo" $srca) -}}
+    {{- $info2 := getJSON (print (index $srcb 0) "/" "f_auto,q_auto," $size1 "/fl_getinfo" $srca) -}}
+    {{- $info3 := getJSON (print (index $srcb 0) "/" "f_auto,q_auto," $size1 "/fl_getinfo" $srca) -}}
     {{- $w1 = $info1.output.width -}}
     {{- $h1 = $info1.output.height -}}
     {{- $w2 = $info2.output.width -}}
