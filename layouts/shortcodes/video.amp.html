@@ -5,15 +5,24 @@
 {{- $layout := .Get "layout" | default "responsive" -}}
 
 {{- $src := .Get "src" | default (.Get 0) -}}
-{{- $original := .Page.Resources.GetMatch $src -}}
-{{- if $original -}}
-  {{- $origsrc = $original.RelPermalink -}}
-  {{- $w = $original.Width -}}
-  {{- $h = $original.Height -}}
+{{- if strings.HasPrefix $src "https://res.cloudinary.com/" -}}
+    {{- $srcb := findRE "https://res.cloudinary.com/.*?/video/upload" $src -}}
+    {{- $srca := strings.TrimPrefix (index $srcb 0) $src -}}
+    {{- $origsrc = print (index $srcb 0) "/q_auto" $srca -}}
+    {{- $info := getJSON (print (index $srcb 0) "/q_auto/fl_getinfo/" $srca) -}}
+    {{- $w = $info.output.width -}}
+    {{- $h = $info.output.height -}}
 {{- else -}}
-  {{- $origsrc = $src -}}
-  {{- $w = .Get "w" | default 600 -}}
-  {{- $h = .Get "h" | default 450 -}}
+  {{- $original := .Page.Resources.GetMatch $src -}}
+  {{- if $original -}}
+    {{- $origsrc = $original.RelPermalink -}}
+    {{- $w = $original.Width -}}
+    {{- $h = $original.Height -}}
+  {{- else -}}
+    {{- $origsrc = $src -}}
+    {{- $w = .Get "w" | default 600 -}}
+    {{- $h = .Get "h" | default 450 -}}
+  {{- end -}}
 {{- end -}}
 
 <div class="video">

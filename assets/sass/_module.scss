@@ -35,6 +35,14 @@
   }
 }
 
+.chroma {
+  overflow-y: scroll;
+}
+
+div > pre.chroma {
+  padding: 1em;
+}
+
 .video {
   margin: 10px;
   text-align: center;

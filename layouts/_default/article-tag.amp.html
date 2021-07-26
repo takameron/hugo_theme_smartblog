@@ -10,14 +10,14 @@
 
   {{- if strings.HasPrefix $src "https://res.cloudinary.com/" -}}
     {{- $srcb := findRE "https://res.cloudinary.com/.*?/image/upload" $src -}}
-    {{- $srca := strings.TrimLeft (index $srcb 0) $src -}}
+    {{- $srca := strings.TrimPrefix (index $srcb 0) $src -}}
 
     {{- $size1 := print "c_limit,w_" (mul $w 1) ",h_" (mul $h 1) -}}
     {{- $size2 := print "c_limit,w_" (mul $w 2) ",h_" (mul $h 2) -}}
     {{- $size3 := print "c_limit,w_" (mul $w 3) ",h_" (mul $h 3) -}}
-    {{- $src1 = print (index $srcb 0) "/" "f_auto,q_auto," $size1 "/" $srca -}}
-    {{- $src2 = print (index $srcb 0) "/" "f_auto,q_auto," $size2 "/" $srca -}}
-    {{- $src3 = print (index $srcb 0) "/" "f_auto,q_auto," $size3 "/" $srca -}}
+    {{- $src1 = print (index $srcb 0) "/" "f_auto,q_auto," $size1 $srca -}}
+    {{- $src2 = print (index $srcb 0) "/" "f_auto,q_auto," $size2 $srca -}}
+    {{- $src3 = print (index $srcb 0) "/" "f_auto,q_auto," $size3 $srca -}}
   {{- else -}}
     {{- $original := .Resources.GetMatch $src -}}
     {{- if $original -}}
