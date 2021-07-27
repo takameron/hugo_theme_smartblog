@@ -5,6 +5,9 @@
 {{ partial "head/head.amp.html" . }}
 </head>
 <body>
+{{- if and .Site.GoogleAnalytics hugo.IsProduction }}
+  {{- partial "head/google_analytics.amp.html" . -}}
+{{- end }}
 {{ partial "header.html" . }}
 <div class="l-container l-flex">
 {{ block "main" . }}{{- end }}
