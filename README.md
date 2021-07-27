@@ -21,7 +21,7 @@ It is for blogs and has various functions.
 
 1. Replace `archetypes/default.md` with the following text.
     ```
-    +++
+    ---
     title: "{{ replace .Name "-" " " | title }}"
     date: {{ .Date }}
     lastmod: {{ .Date }}
@@ -32,7 +32,7 @@ It is for blogs and has various functions.
     archives: ["{{ dateFormat "2006" .Date }}","{{ dateFormat "2006-01" .Date }}"]
     toc: true
     draft: true
-    +++
+    ---
 
     ```
 
