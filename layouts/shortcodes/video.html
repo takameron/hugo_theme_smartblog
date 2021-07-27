@@ -7,9 +7,8 @@
     {{- $srcb := findRE "https://res.cloudinary.com/.*?/video/upload" $src -}}
     {{- $srca := strings.TrimPrefix (index $srcb 0) $src -}}
     {{- $origsrc = print (index $srcb 0) "/q_auto" $srca -}}
-    {{- $info := getJSON (print (index $srcb 0) "/q_auto/fl_getinfo/" $srca) -}}
-    {{- $w = $info.output.width -}}
-    {{- $h = $info.output.height -}}
+    {{- $w = .Get "w" | default 600 -}}
+    {{- $h = .Get "h" | default 450 -}}
 {{- else -}}
   {{- $original := .Page.Resources.GetMatch $src -}}
   {{- if $original -}}
