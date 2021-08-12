@@ -35,8 +35,14 @@
   }
 }
 
-.chroma {
-  overflow-y: scroll;
+.highlight pre {
+  overflow: auto;
+}
+
+.highlight div {
+  pre {
+    overflow: visible;
+  }
 }
 
 div > pre.chroma {
