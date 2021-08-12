@@ -4,14 +4,14 @@
 {{- else -}}
   {{- if strings.HasPrefix .Destination "http" -}}
     {{- $url := .Destination -}}
-    {{- $getURL := printf "https://meta.tsukayaku.workers.dev/?%s" (querify "url" $url ) -}}
+    {{- $getURL := printf "https://meta-api-sigma.vercel.app/api/?%s" (querify "url" $url ) -}}
     {{- $metajson := getJSON $getURL -}}
 
     {{- if $metajson.success -}}
       {{- if $metajson.title -}}
         {{- $title = $metajson.title -}}
-      {{- else if $metajson.og_title -}}
-        {{- $title = $metajson.og_title -}}
+      {{- else if $metajson.metas.og_title -}}
+        {{- $title = $metajson.metas.og_title -}}
       {{- end -}}
     {{- end -}}
   {{- end -}}

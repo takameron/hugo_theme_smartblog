@@ -1,6 +1,6 @@
 <!-- https://blog.a-1.dev/post/2019-04-20-blog-card/ -->
 {{- $url := .Get 0 -}}
-{{- $getURL := printf "https://meta.tsukayaku.workers.dev/?%s" (querify "url" $url ) -}}
+{{- $getURL := printf "https://meta-api-sigma.vercel.app/api/?%s" (querify "url" $url ) -}}
 {{- $metajson := getJSON $getURL -}}
 {{- $urlInfo := urls.Parse $url -}}
 {{- $host := printf "%s://%s/" $urlInfo.Scheme $urlInfo.Host -}}
@@ -13,22 +13,22 @@
 {{- if $metajson.success -}}
   {{- if $metajson.title -}}
     {{- $title = $metajson.title -}}
-  {{- else if $metajson.og_title -}}
-    {{- $title = $metajson.og_title -}}
+  {{- else if $metajson.metas.og_title -}}
+    {{- $title = $metajson.metas.og_title -}}
   {{- else -}}
     {{- $title = $url -}}
   {{- end -}}
 
-  {{- if $metajson.description -}}
-    {{- $description = $metajson.description -}}
-  {{- else if $metajson.og_description -}}
-    {{- $description = $metajson.og_description -}}
+  {{- if $metajson.metas.description -}}
+    {{- $description = $metajson.metas.description -}}
+  {{- else if $metajson.metas.og_description -}}
+    {{- $description = $metajson.metas.og_description -}}
   {{- end -}}
 
-  {{- if $metajson.og_image -}}
-    {{- $image = $metajson.og_image -}}
-  {{- else if $metajson.twitter_image -}}
-    {{- $image = $metajson.twitter_image -}}
+  {{- if $metajson.metas.og_image -}}
+    {{- $image = $metajson.metas.og_image -}}
+  {{- else if $metajson.metas.twitter_image -}}
+    {{- $image = $metajson.metas.twitter_image -}}
   {{- end -}}
 {{- else -}}
   {{- $title := $metajson.url -}}
