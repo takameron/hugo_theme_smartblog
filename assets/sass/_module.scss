@@ -128,7 +128,7 @@ div > pre.chroma {
   }
 
   &-title {
-    padding: 0 0 0.2em 0;
+    padding: 0 0 0.2em;
     margin: 0;
     background: unset;
     border: unset;
@@ -182,7 +182,7 @@ div > pre.chroma {
   }
 
   &-title {
-    padding: 0 0 0.2em 0;
+    padding: 0 0 0.2em;
     margin: 0;
     font-size: 1rem;
     line-height: 1.3em;
@@ -440,8 +440,8 @@ div > pre.chroma {
     margin-bottom: 2rem;
 
     &-title {
-      padding: 0 0 0.5rem 0;
-      margin: 0 0 1rem 0;
+      padding: 0 0 0.5rem;
+      margin: 0 0 1rem;
       text-align: center;
       background: unset;
       border-bottom: solid 5px $COLOR-PRIMARY;
