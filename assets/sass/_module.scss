@@ -259,10 +259,14 @@ div > pre.chroma {
   }
 
   &-thumb {
-    max-width: 100%;
-    height: auto;
     margin-top: 2rem;
-    object-fit: cover;
+    text-align: center;
+
+    &-img {
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
   }
 
   &-toc {

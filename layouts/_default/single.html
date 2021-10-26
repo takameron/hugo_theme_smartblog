@@ -64,12 +64,13 @@
         <span class="tag icon-price-tag"><a href="/tags/{{ . | urlize }}">{{ . }}</a></span>
         {{- end }}
       </aside>
+      <aside class="single-thumb">
       {{- with .Params.images }}
       {{- range first 1 . }}
       <img
         width={{ $w1 }}
         height={{ $h1 }}
-        class="single-thumb"
+        class="single-thumb-img"
         src="{{ . | absURL }}"
         srcset="
             {{- with $src1 }} {{ $src1 }} {{ $w1 }}w{{ end -}}
@@ -79,6 +80,7 @@
         alt="thumbnail">
       {{ end -}}
       {{- end }}
+      </aside>
     </header>
     <div class="toc">
     {{ partial "article/toc.html" . }}
