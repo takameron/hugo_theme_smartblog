@@ -4,7 +4,7 @@
     "lint:css-fix": "stylelint **/*.scss --fix"
   },
   "devDependencies": {
-    "stylelint": "^14.0.0",
+    "stylelint": "^14.0.1",
     "stylelint-config-recess-order": "^2.5.0",
     "stylelint-config-recommended": "^6.0.0",
     "stylelint-config-recommended-scss": "^5.0.0",
