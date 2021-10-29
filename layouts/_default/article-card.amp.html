@@ -38,8 +38,8 @@
       {{- with .Params.images }}
       {{- range first 1 . }}
       <amp-img
-        width=267
-        height=150
+        width={{ $w }}
+        height={{ $h }}
         class="article-card-img"
         src="{{ . | absURL }}"
         srcset="
