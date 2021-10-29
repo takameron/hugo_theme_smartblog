@@ -12,24 +12,32 @@
   {{- $resized_orig := $original -}}
   {{- $resized_webp := $original -}}
 
-  {{- $size := "" -}}
-  {{- if or (.Get "w") (.Get "h" ) -}}
-    {{- $size = print $w "x" $h -}}
+  {{- if strings.HasSuffix $src "svg" -}}
+    {{- $origsrc = $original.RelPermalink -}}
+    {{- $resizesrc_orig = $original.RelPermalink -}}
+    {{- $resizesrc_webp = $original.RelPermalink -}}
+    {{- $w = .Get "w" | default 600 -}}
+    {{- $h = .Get "h" | default 450 -}}
   {{- else -}}
-    {{- if gt $original.Width 600 -}}
-      {{- $size = "600x" -}}
+    {{- $size := "" -}}
+    {{- if or (.Get "w") (.Get "h" ) -}}
+      {{- $size = print $w "x" $h -}}
     {{- else -}}
-      {{- $size = print $original.Width "x" -}}
+      {{- if gt $original.Width 600 -}}
+        {{- $size = "600x" -}}
+      {{- else -}}
+        {{- $size = print $original.Width "x" -}}
+      {{- end -}}
     {{- end -}}
-  {{- end -}}
 
-  {{- $resized_orig = $original.Resize (print $size " q90") -}}
-  {{- $resized_webp = $original.Resize (print $size " q90 webp") -}}
-  {{- $origsrc = $original.RelPermalink -}}
-  {{- $resizesrc_orig = $resized_orig.RelPermalink -}}
-  {{- $resizesrc_webp = $resized_webp.RelPermalink -}}
-  {{- $w = $resized_orig.Width -}}
-  {{- $h = $resized_orig.Height -}}
+    {{- $resized_orig = $original.Resize (print $size " q90") -}}
+    {{- $resized_webp = $original.Resize (print $size " q90 webp") -}}
+    {{- $origsrc = $original.RelPermalink -}}
+    {{- $resizesrc_orig = $resized_orig.RelPermalink -}}
+    {{- $resizesrc_webp = $resized_webp.RelPermalink -}}
+    {{- $w = $resized_orig.Width -}}
+    {{- $h = $resized_orig.Height -}}
+  {{- end -}}
 {{- else -}}
   {{- $origsrc = $src -}}
   {{- $resizesrc_orig = $src -}}
