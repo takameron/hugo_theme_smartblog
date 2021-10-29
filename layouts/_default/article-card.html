@@ -65,8 +65,8 @@
         src="{{ . | absURL }}"
         srcset="
             {{- with $src1 }} {{ $src1 }} {{ mul $w 1 }}w{{ end -}}
-            {{- with $src2 }},{{ $src2 }} {{ mul $w 2 }}w{{ end -}}
-            {{- with $src3 }},{{ $src3 }} {{ mul $w 3 }}w{{ end -}}
+            {{- with $src2 }}{{ if ne $src1 $src2 }},{{ $src2 }} {{ mul $w 2 }}w{{ end }}{{ end -}}
+            {{- with $src3 }}{{ if ne $src2 $src3 }},{{ $src3 }} {{ mul $w 3 }}w{{ end }}{{ end -}}
             "
         alt="thumbnail">
       {{- end }}
