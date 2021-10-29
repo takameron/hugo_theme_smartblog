@@ -40,6 +40,14 @@
         {{- $src2 = $resized2.RelPermalink -}}
         {{- $src3 = $resized3.RelPermalink -}}
       {{- end -}}
+    {{- else -}}
+      {{- $src1 = $src -}}
+      {{- $src2 = $src -}}
+      {{- $src3 = $src -}}
+      {{- $w1 = $w -}}
+      {{- $h1 = $h -}}
+      {{- $w2 = $w -}}
+      {{- $w3 = $w -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
