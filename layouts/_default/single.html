@@ -2,6 +2,7 @@
 {{ define "main" }}
 
 {{- $w := 640 -}}
+{{- $h := 480 -}}
 
 {{- $src1 := "" -}}
 {{- $src2 := "" -}}
@@ -18,33 +19,62 @@
     {{- $srcb := findRE "https://res.cloudinary.com/.*?/image/upload" $src -}}
     {{- $srca := strings.TrimPrefix (index $srcb 0) $src -}}
 
-    {{- $size1 := print "c_limit,w_" (mul $w 1) -}}
-    {{- $size2 := print "c_limit,w_" (mul $w 2) -}}
-    {{- $size3 := print "c_limit,w_" (mul $w 3) -}}
-    {{- $src1 = print (index $srcb 0) "/" "f_auto,q_auto," $size1 $srca -}}
-    {{- $src2 = print (index $srcb 0) "/" "f_auto,q_auto," $size2 $srca -}}
-    {{- $src3 = print (index $srcb 0) "/" "f_auto,q_auto," $size3 $srca -}}
-    {{- $info1 := getJSON (print (index $srcb 0) "/" "f_auto,q_auto," $size1 "/fl_getinfo" $srca) -}}
-    {{- $info2 := getJSON (print (index $srcb 0) "/" "f_auto,q_auto," $size1 "/fl_getinfo" $srca) -}}
-    {{- $info3 := getJSON (print (index $srcb 0) "/" "f_auto,q_auto," $size1 "/fl_getinfo" $srca) -}}
-    {{- $w1 = $info1.output.width -}}
-    {{- $h1 = $info1.output.height -}}
-    {{- $w2 = $info2.output.width -}}
-    {{- $w3 = $info3.output.width -}}
+    {{- if strings.HasSuffix $src "svg" -}}
+      {{- $src1 = $src -}}
+      {{- $src2 = $src -}}
+      {{- $src3 = $src -}}
+      {{- $info := getJSON (print (index $srcb 0) "/fl_getinfo" $srca) -}}
+      {{- $w1 = $info.Width -}}
+      {{- $h1 = $info.Height -}}
+      {{- $w2 = $info.Width -}}
+      {{- $w3 = $info.Width -}}
+    {{- else -}}
+      {{- $size1 := print "c_limit,w_" (mul $w 1) -}}
+      {{- $size2 := print "c_limit,w_" (mul $w 2) -}}
+      {{- $size3 := print "c_limit,w_" (mul $w 3) -}}
+      {{- $src1 = print (index $srcb 0) "/" "f_auto,q_auto," $size1 $srca -}}
+      {{- $src2 = print (index $srcb 0) "/" "f_auto,q_auto," $size2 $srca -}}
+      {{- $src3 = print (index $srcb 0) "/" "f_auto,q_auto," $size3 $srca -}}
+      {{- $info1 := getJSON (print (index $srcb 0) "/" "f_auto,q_auto," $size1 "/fl_getinfo" $srca) -}}
+      {{- $info2 := getJSON (print (index $srcb 0) "/" "f_auto,q_auto," $size1 "/fl_getinfo" $srca) -}}
+      {{- $info3 := getJSON (print (index $srcb 0) "/" "f_auto,q_auto," $size1 "/fl_getinfo" $srca) -}}
+      {{- $w1 = $info1.output.width -}}
+      {{- $h1 = $info1.output.height -}}
+      {{- $w2 = $info2.output.width -}}
+      {{- $w3 = $info3.output.width -}}
+    {{- end -}}
   {{- else -}}
     {{- $original := .Resources.GetMatch $src -}}
     {{- if $original -}}
-      {{- $resized1 := $original.Resize (print (mul $w 1) "x" " q90 webp") -}}
-      {{- $resized2 := $original.Resize (print (mul $w 2) "x" " q90 webp") -}}
-      {{- $resized3 := $original.Resize (print (mul $w 3) "x" " q90 webp") -}}
+      {{- if strings.HasSuffix $src "svg" -}}
+        {{- $src1 = $original.RelPermalink -}}
+        {{- $src2 = $original.RelPermalink -}}
+        {{- $src3 = $original.RelPermalink -}}
+        {{- $w1 = $w -}}
+        {{- $h1 = $h -}}
+        {{- $w2 = $w -}}
+        {{- $w3 = $w -}}
+      {{- else -}}
+        {{- $resized1 := $original.Resize (print (mul $w 1) "x" " q90 webp") -}}
+        {{- $resized2 := $original.Resize (print (mul $w 2) "x" " q90 webp") -}}
+        {{- $resized3 := $original.Resize (print (mul $w 3) "x" " q90 webp") -}}
 
-      {{- $src1 = $resized1.RelPermalink -}}
-      {{- $src2 = $resized2.RelPermalink -}}
-      {{- $src3 = $resized3.RelPermalink -}}
-      {{- $w1 = $resized1.Width -}}
-      {{- $h1 = $resized1.Height -}}
-      {{- $w2 = $resized2.Width -}}
-      {{- $w3 = $resized3.Width -}}
+        {{- $src1 = $resized1.RelPermalink -}}
+        {{- $src2 = $resized2.RelPermalink -}}
+        {{- $src3 = $resized3.RelPermalink -}}
+        {{- $w1 = $resized1.Width -}}
+        {{- $h1 = $resized1.Height -}}
+        {{- $w2 = $resized2.Width -}}
+        {{- $w3 = $resized3.Width -}}
+      {{- end -}}
+    {{- else -}}
+      {{- $src1 = $src -}}
+      {{- $src2 = $src -}}
+      {{- $src3 = $src -}}
+      {{- $w1 = $w -}}
+      {{- $h1 = $h -}}
+      {{- $w2 = $w -}}
+      {{- $w3 = $w -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
@@ -64,12 +94,13 @@
         <span class="tag icon-price-tag"><a href="/tags/{{ . | urlize }}">{{ . }}</a></span>
         {{- end }}
       </aside>
+      <aside class="single-thumb">
       {{- with .Params.images }}
       {{- range first 1 . }}
       <img
         width={{ $w1 }}
         height={{ $h1 }}
-        class="single-thumb"
+        class="single-thumb-img"
         src="{{ . | absURL }}"
         srcset="
             {{- with $src1 }} {{ $src1 }} {{ $w1 }}w{{ end -}}
@@ -79,6 +110,7 @@
         alt="thumbnail">
       {{ end -}}
       {{- end }}
+      </aside>
     </header>
     <div class="toc">
     {{ partial "article/toc.html" . }}
