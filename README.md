@@ -253,15 +253,13 @@ example : https://www.amazon.co.jp/dp/B08GCM963G/
 ### Twitter
 example : https://twitter.com/Twitter/status/1390725076996268038
 ```
-{{< twitter 1390725076996268038 >}}
+{{< twitter user="Twitter" id="1390725076996268038" >}}
 ```
 
-| Attributes | Info     | Key | Order | Default Value | Required | 
-| ---------- | -------- | --- | ----- | ------------- | -------- | 
-| id         | Tweet ID |     | 0     |               | o        | 
-| width      | width    |     | 1     | 500           |          | 
-| height     | height   |     | 2     | 500           |          | 
-| layout     | layout   |     | 3     | responsive    |          | 
+| Attributes | Info      | Key  | Order | Default Value | Required | 
+| ---------- | --------- | ---- | ----- | ------------- | -------- | 
+| user       | User Name | user |       |               | o        | 
+| id         | Tweet ID  | id   |       |               | o        | 
 
 ### video
 ```
