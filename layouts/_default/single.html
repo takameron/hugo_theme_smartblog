@@ -23,7 +23,7 @@
       {{- $src1 = $src -}}
       {{- $src2 = $src -}}
       {{- $src3 = $src -}}
-      {{- $info := getJSON (print (index $srcb 0) "/fl_getinfo" $srca) -}}
+      {{- $info := getJSON (print (index $srcb 0) "/q_auto/fl_getinfo" $srca) -}}
       {{- $w1 = $info.Width -}}
       {{- $h1 = $info.Height -}}
       {{- $w2 = $info.Width -}}
