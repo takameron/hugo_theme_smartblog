@@ -24,10 +24,10 @@
       {{- $src2 = $src -}}
       {{- $src3 = $src -}}
       {{- $info := getJSON (print (index $srcb 0) "/q_auto/fl_getinfo" $srca) -}}
-      {{- $w1 = $info.Width -}}
-      {{- $h1 = $info.Height -}}
-      {{- $w2 = $info.Width -}}
-      {{- $w3 = $info.Width -}}
+      {{- $w1 = $info.output.width -}}
+      {{- $h1 = $info.output.height -}}
+      {{- $w2 = $info.output.width -}}
+      {{- $w3 = $info.output.width -}}
     {{- else -}}
       {{- $size1 := print "c_limit,w_" (mul $w 1) -}}
       {{- $size2 := print "c_limit,w_" (mul $w 2) -}}
