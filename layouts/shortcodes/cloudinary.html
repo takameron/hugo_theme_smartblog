@@ -38,9 +38,9 @@
   {{- $src1 = $origsrc -}}
   {{- $src2 = $origsrc -}}
   {{- $src3 = $origsrc -}}
-  {{- $info1 = getJSON (print (index $srcb 0) "/fl_getinfo" $srca) -}}
-  {{- $info2 = getJSON (print (index $srcb 0) "/fl_getinfo" $srca) -}}
-  {{- $info3 = getJSON (print (index $srcb 0) "/fl_getinfo" $srca) -}}
+  {{- $info1 = getJSON (print (index $srcb 0) "/q_auto/fl_getinfo" $srca) -}}
+  {{- $info2 = getJSON (print (index $srcb 0) "/q_auto/fl_getinfo" $srca) -}}
+  {{- $info3 = getJSON (print (index $srcb 0) "/q_auto/fl_getinfo" $srca) -}}
 {{- else -}}
   {{- $src1 = print (index $srcb 0) "/" "f_auto,q_auto," $size1 $srca -}}
   {{- $src2 = print (index $srcb 0) "/" "f_auto,q_auto," $size2 $srca -}}
@@ -64,8 +64,8 @@
       height="{{ $info1.output.height }}"
       src="{{ $src1 }}"
       srcset="{{ $src1 }} {{ $info1.output.width }}w
-        {{ if ne $info1.output.width $info2.output.width }},{{ $src2 }} {{ $info2.output.width }}w{{ end }}
-        {{ if ne $info2.output.width $info3.output.width }},{{ $src3 }} {{ $info3.output.width }}w{{ end }}"
+        {{- if ne $info1.output.width $info2.output.width }},{{ $src2 }} {{ $info2.output.width }}w{{ end -}}
+        {{- if ne $info2.output.width $info3.output.width }},{{ $src3 }} {{ $info3.output.width }}w{{ end -}}"
       alt="{{ $alt }}"
     >
   </a>

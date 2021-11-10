@@ -94,12 +94,13 @@
         <span class="tag icon-price-tag"><a href="/tags/{{ . | urlize }}">{{ . }}</a></span>
         {{- end }}
       </aside>
+      <aside class="single-thumb"></aside>
       {{- with .Params.images }}
       {{- range first 1 . }}
       <amp-img
-        width={{ $w1 }}
-        height={{ $h1 }}
-        class="single-thumb"
+        width="{{ $w1 }}"
+        height="{{ $h1 }}"
+        class="single-thumb-img"
         src="{{ . | absURL }}"
         srcset="
             {{- with $src1 }} {{ $src1 }} {{ $w1 }}w{{ end -}}
@@ -109,6 +110,7 @@
         alt="thumbnail"></amp-img>
       {{ end -}}
       {{- end }}
+      </aside>
     </header>
     <div class="toc">
     {{ partial "article/toc.html" . }}
