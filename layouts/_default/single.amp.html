@@ -98,8 +98,8 @@
       {{- with .Params.images }}
       {{- range first 1 . }}
       <amp-img
-        width={{ $w1 }}
-        height={{ $h1 }}
+        width="{{ $w1 }}"
+        height="{{ $h1 }}"
         class="single-thumb-img"
         src="{{ . | absURL }}"
         srcset="
