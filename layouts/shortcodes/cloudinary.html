@@ -3,7 +3,7 @@
 {{- $h := .Get "h" -}}
 {{- $alt := "" -}}
 
-{{- if ne (and (.Get "w") (.Get "h")) -}}
+{{- if not (and (.Get "w") (.Get "h")) -}}
   {{- $w = 600 -}}
 {{- end -}}
 
