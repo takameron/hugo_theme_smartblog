@@ -30,12 +30,16 @@
   {{- else if $metajson.metas.twitter_image -}}
     {{- $image = $metajson.metas.twitter_image -}}
   {{- end -}}
+  {{- $imageUrlInfo := urls.Parse $image -}}
+  {{- if and (hasPrefix $image "/") (not $imageUrlInfo.Host) -}}
+    {{- $image = $host $image -}}
+  {{- else if (hasPrefix $image "//") -}}
+    {{- $image = "https:" + $image -}}
+  {{- end -}}
 {{- else -}}
   {{- $title := $metajson.url -}}
   {{- $description := $metajson.statusText -}}
 {{- end -}}
-
-{{ $image = replaceRE "^/" $host $image }}
 
 <div class="blogcard l-flex box">
   <div class="blogcard-body l-flex l-flex-column">
