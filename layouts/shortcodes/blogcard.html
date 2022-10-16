@@ -34,7 +34,7 @@
   {{- if and (hasPrefix $image "/") (not $imageUrlInfo.Host) -}}
     {{- $image = $host $image -}}
   {{- else if (hasPrefix $image "//") -}}
-    {{- $image = "https:" + $image -}}
+    {{- $image = print "https:" $image -}}
   {{- end -}}
 {{- else -}}
   {{- $title := $metajson.url -}}
