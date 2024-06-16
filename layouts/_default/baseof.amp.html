@@ -6,6 +6,25 @@
 </head>
 <body>
 {{- if and .Site.Config.Services.GoogleAnalytics.ID hugo.IsProduction }}
+  {{- if and site.Config.Privacy.GoogleAnalytics.RespectDoNotTrack -}}
+  <amp-consent layout="nodisplay" id="consent-element">
+    <script type="application/json">
+      {
+        "consentInstanceId": "myConsent",
+        "consentRequired": true,
+        "promptUI": "myConsentPopup"
+      }
+    </script>
+    <div id="myConsentPopup" class="popupOverlay">
+      <div class="consentPopup">
+        <p>We use cookies to improve your user experience.</p>
+        <button id="accept" on="tap:consent-element.accept">Accept</button>
+        <button id="decline" on="tap:consent-element.reject">Decline</button>
+      </div>
+    </div>
+  </amp-consent>
+  {{- end -}}
+
   {{- partial "head/google_analytics.amp.html" . -}}
 {{- end }}
 {{ partial "header.html" . }}
