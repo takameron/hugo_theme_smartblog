@@ -8,7 +8,7 @@ description = "Functional and fast theme for Hugo."
 homepage = "https://github.com/takameron/hugo_theme_smartblog"
 tags = ["blog","responsive","OGP","AMP"]
 features = []
-min_version = "0.83.1"
+min_version = "0.127.0"
 
 [author]
   name = "takameron"
