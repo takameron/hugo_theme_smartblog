@@ -30,6 +30,6 @@
 {{- template "_internal/twitter_cards.html" . -}}
 {{- partial "head/site_schema.html" . -}}
 
-{{- if and .Site.GoogleAnalytics hugo.IsProduction }}
+{{- if and .Site.Config.Services.GoogleAnalytics.ID hugo.IsProduction }}
 {{- partial "head/google_analytics.html" . -}}
 {{- end }}
