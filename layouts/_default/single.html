@@ -42,11 +42,11 @@
         {{- $w1 = $info1.output.width -}}
         {{- $h1 = $info1.output.height -}}
       {{- end -}}
-      {{- with resources.GetRemote (print (index $srcb 0) "/" "f_auto,q_auto," $size1 "/fl_getinfo" $srca) -}}
+      {{- with resources.GetRemote (print (index $srcb 0) "/" "f_auto,q_auto," $size2 "/fl_getinfo" $srca) -}}
         {{- $info2 := . | transform.Unmarshal -}}
         {{- $w2 = $info2.output.width -}}
       {{- end -}}
-      {{- with resources.GetRemote (print (index $srcb 0) "/" "f_auto,q_auto," $size1 "/fl_getinfo" $srca) -}}
+      {{- with resources.GetRemote (print (index $srcb 0) "/" "f_auto,q_auto," $size3 "/fl_getinfo" $srca) -}}
         {{- $info3 := . | transform.Unmarshal -}}
         {{- $w3 = $info3.output.width -}}
       {{- end -}}
