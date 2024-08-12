@@ -25,7 +25,7 @@ It is for blogs and has various functions.
     title: "{{ replace .Name "-" " " | title }}"
     date: {{ .Date }}
     lastmod: {{ .Date }}
-    author: "{{ .Site.Author.name }}"
+    author: "{{ .Site.Taxonomies.author }}"
     images: ["post-cover.png"]
     categories: ["category1"]
     tags: ["tag1","tag2"]
@@ -50,9 +50,6 @@ It is for blogs and has various functions.
     #disqusShortname = "yourdiscussshortname"
     ignoreErrors = ["error-remote-getjson"]
     timeout = 30000
-
-    [Author]
-      name = "writer name"
 
     [params]
       title = "My New Hugo Site" # For OGP
@@ -92,6 +89,7 @@ It is for blogs and has various functions.
       tag = "tags"
       category = "categories"
       archive = "archives"
+      author = "writer name"
 
     [markup]
       [markup.goldmark]
