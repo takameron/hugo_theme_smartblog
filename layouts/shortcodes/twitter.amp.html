@@ -29,11 +29,12 @@
   height="{{ 500 }}"
   layout="{{ "responsive" }}"
 >
-  {{- $url := printf "https://twitter.com/%v/status/%v" .user .id -}}
-  {{- $query := querify "url" $url "dnt" .dnt -}}
-  {{- $request := printf "https://publish.twitter.com/oembed?%s" $query -}}
-  {{- $json := getJSON $request -}}
-  {{- $json.html | replaceRE `<blockquote.*?>` `<blockquote placeholder>` | replaceRE `<script.*?>(.|\n)*?</script>` "" | safeHTML -}}
+  {{- $postUrl := printf "https://twitter.com/%v/status/%v" .user .id -}}
+  {{- $apiUrl := printf "https://publish.twitter.com/oembed?%s" (querify "url" $postUrl "dnt" .dnt) -}}
+  {{- with resources.GetRemote $apiUrl -}}
+    {{- $data := . | transform.Unmarshal -}}
+    {{- $data.html | replaceRE `<blockquote.*?>` `<blockquote placeholder>` | replaceRE `<script.*?>(.|\n)*?</script>` "" | safeHTML -}}
+  {{- end -}}
   <div fallback>
     An error occurred while retrieving the Tweet. It might have been deleted.
   </div>
