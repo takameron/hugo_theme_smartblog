@@ -23,11 +23,13 @@
       {{- $src1 = $src -}}
       {{- $src2 = $src -}}
       {{- $src3 = $src -}}
-      {{- $info := getJSON (print (index $srcb 0) "/q_auto/fl_getinfo" $srca) -}}
-      {{- $w1 = $info.output.width -}}
-      {{- $h1 = $info.output.height -}}
-      {{- $w2 = $info.output.width -}}
-      {{- $w3 = $info.output.width -}}
+      {{- with resources.GetRemote (print (index $srcb 0) "/q_auto/fl_getinfo" $srca) -}}
+        {{- $info := . | transform.Unmarshal -}}
+        {{- $w1 = $info.output.width -}}
+        {{- $h1 = $info.output.height -}}
+        {{- $w2 = $info.output.width -}}
+        {{- $w3 = $info.output.width -}}
+      {{- end -}}
     {{- else -}}
       {{- $size1 := print "c_limit,w_" (mul $w 1) -}}
       {{- $size2 := print "c_limit,w_" (mul $w 2) -}}
@@ -35,13 +37,19 @@
       {{- $src1 = print (index $srcb 0) "/" "f_auto,q_auto," $size1 $srca -}}
       {{- $src2 = print (index $srcb 0) "/" "f_auto,q_auto," $size2 $srca -}}
       {{- $src3 = print (index $srcb 0) "/" "f_auto,q_auto," $size3 $srca -}}
-      {{- $info1 := getJSON (print (index $srcb 0) "/" "f_auto,q_auto," $size1 "/fl_getinfo" $srca) -}}
-      {{- $info2 := getJSON (print (index $srcb 0) "/" "f_auto,q_auto," $size1 "/fl_getinfo" $srca) -}}
-      {{- $info3 := getJSON (print (index $srcb 0) "/" "f_auto,q_auto," $size1 "/fl_getinfo" $srca) -}}
-      {{- $w1 = $info1.output.width -}}
-      {{- $h1 = $info1.output.height -}}
-      {{- $w2 = $info2.output.width -}}
-      {{- $w3 = $info3.output.width -}}
+      {{- with resources.GetRemote (print (index $srcb 0) "/" "f_auto,q_auto," $size1 "/fl_getinfo" $srca) -}}
+        {{- $info1 := . | transform.Unmarshal -}}
+        {{- $w1 = $info1.output.width -}}
+        {{- $h1 = $info1.output.height -}}
+      {{- end -}}
+      {{- with resources.GetRemote (print (index $srcb 0) "/" "f_auto,q_auto," $size1 "/fl_getinfo" $srca) -}}
+        {{- $info2 := . | transform.Unmarshal -}}
+        {{- $w2 = $info2.output.width -}}
+      {{- end -}}
+      {{- with resources.GetRemote (print (index $srcb 0) "/" "f_auto,q_auto," $size1 "/fl_getinfo" $srca) -}}
+        {{- $info3 := . | transform.Unmarshal -}}
+        {{- $w3 = $info3.output.width -}}
+      {{- end -}}
     {{- end -}}
   {{- else -}}
     {{- $original := .Resources.GetMatch $src -}}

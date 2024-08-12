@@ -51,31 +51,33 @@
 {{- $price := "" -}}
 
 {{- $openbdURL := printf "https://api.openbd.jp/v1/get?%s" (querify "isbn" $isbn13 ) -}}
-{{- $openbdJSON := getJSON $openbdURL -}}
-{{- if (index $openbdJSON 0) -}}
-  {{- $data := (index $openbdJSON 0) -}}
-  {{- $title = $data.summary.title -}}
-  {{- $image = $data.summary.cover -}}
-  {{- $author = $data.summary.author -}}
-  {{- $publisher = $data.summary.publisher -}}
-  {{- $pubdate = $data.summary.pubdate -}}
-  {{- if ne $data.onix.CollateralDetail.TextContent nil }}{{ $description = (index $data.onix.CollateralDetail.TextContent 0).Text }}{{ end -}}
-  {{- if ne $data.onix.ProductSupply.SupplyDetail.Price nil }}{{ $price = (index $data.onix.ProductSupply.SupplyDetail.Price 0).PriceAmount }}{{ end -}}
-{{- else -}}
-  {{- $gbooksURL := printf "https://www.googleapis.com/books/v1/volumes?q=isbn:%s" $isbn13 -}}
-  {{- $gbooksJSON := getJSON $gbooksURL -}}
-
-  {{- if ne $gbooksJSON.totalItems 0 -}}
-    {{- $data := (index $gbooksJSON.items 0) -}}
-    {{- $title = $data.volumeInfo.title -}}
-    {{- $image = $data.volumeInfo.imageLinks.smallThumbnail -}}
-    {{- $author = (index $data.volumeInfo.authors 0) -}} {{/*$data.volumeInfo.(index authors 0)*/}}
-    {{- $publisher = "" -}}
-    {{- $pubdate = $data.volumeInfo.publishedDate -}}
-    {{- $description = $data.volumeInfo.description -}}
-    {{- $price = "" -}}
+{{- with resources.GetRemote $openbdURL -}}
+  {{- $openbdJSON := . | transform.Unmarshal -}}
+  {{- if (index $openbdJSON 0) -}}
+    {{- $data := (index $openbdJSON 0) -}}
+    {{- $title = $data.summary.title -}}
+    {{- $image = $data.summary.cover -}}
+    {{- $author = $data.summary.author -}}
+    {{- $publisher = $data.summary.publisher -}}
+    {{- $pubdate = $data.summary.pubdate -}}
+    {{- if ne $data.onix.CollateralDetail.TextContent nil }}{{ $description = (index $data.onix.CollateralDetail.TextContent 0).Text }}{{ end -}}
+    {{- if ne $data.onix.ProductSupply.SupplyDetail.Price nil }}{{ $price = (index $data.onix.ProductSupply.SupplyDetail.Price 0).PriceAmount }}{{ end -}}
   {{- else -}}
-    {{- $title = "Not Found" -}}
+    {{- with resources.GetRemote (printf "https://www.googleapis.com/books/v1/volumes?q=isbn:%s" $isbn13) -}}
+      {{- $gbooksJSON := . | transform.Unmarshal -}}
+      {{- if ne $gbooksJSON.totalItems 0 -}}
+        {{- $data := (index $gbooksJSON.items 0) -}}
+        {{- $title = $data.volumeInfo.title -}}
+        {{- $image = $data.volumeInfo.imageLinks.smallThumbnail -}}
+        {{- $author = (index $data.volumeInfo.authors 0) -}} {{/*$data.volumeInfo.(index authors 0)*/}}
+        {{- $publisher = "" -}}
+        {{- $pubdate = $data.volumeInfo.publishedDate -}}
+        {{- $description = $data.volumeInfo.description -}}
+        {{- $price = "" -}}
+      {{- else -}}
+        {{- $title = "Not Found" -}}
+      {{- end -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 
