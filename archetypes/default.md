@@ -2,7 +2,7 @@
 title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
 lastmod: {{ .Date }}
-author: "{{ .Site.Author.name }}"
+author: "{{ .Site.Params.author.name }}"
 images: ["post-cover.png"]
 categories: ["category1"]
 tags: ["tag1","tag2"]
