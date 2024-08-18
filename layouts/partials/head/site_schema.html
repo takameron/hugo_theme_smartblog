@@ -12,7 +12,7 @@
 }
 </script>
 {{ else if .IsPage }}
-{{ $author :=  or (.Params.author) (.Site.Taxonomies.author) }}
+{{ $author :=  or (.Params.author) (.Site.Params.author.name) }}
 {{ $org_name :=  .Site.Title }}
 <script type="application/ld+json">
 {

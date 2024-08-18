@@ -25,7 +25,7 @@ It is for blogs and has various functions.
     title: "{{ replace .Name "-" " " | title }}"
     date: {{ .Date }}
     lastmod: {{ .Date }}
-    author: "{{ .Site.Taxonomies.author }}"
+    author: "{{ .Site.Params.author.name }}"
     images: ["post-cover.png"]
     categories: ["category1"]
     tags: ["tag1","tag2"]
@@ -89,7 +89,6 @@ It is for blogs and has various functions.
       tag = "tags"
       category = "categories"
       archive = "archives"
-      author = "writer name"
 
     [markup]
       [markup.goldmark]
