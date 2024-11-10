@@ -1,0 +1,7 @@
+{{- $style1 :=  resources.Get "sass/style.scss" | resources.ExecuteAsTemplate "style.scss" . }}
+{{- $style2 :=  resources.Get "sass/_base.scss" }}
+{{- $style3 :=  resources.Get "sass/_layout.scss" }}
+{{- $style4 :=  resources.Get "sass/_module.scss" }}
+{{- $style5 :=  resources.Get "sass/_shortcodes.scss" }}
+{{- $style := slice $style1 $style2 $style3 $style4 $style5 | resources.Concat "main.scss" | toCSS | minify | fingerprint }}
+{{- return $style }}

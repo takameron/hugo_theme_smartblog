@@ -3,14 +3,10 @@
 <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
 {{- end }}
 {{ with .Site.Params.logo }}<link rel="apple-touch-icon" href="{{ . }}">{{ end }}
-{{- $style1 :=  resources.Get "sass/style.scss" | resources.ExecuteAsTemplate "style.scss" . }}
-{{- $style2 :=  resources.Get "sass/_base.scss" }}
-{{- $style3 :=  resources.Get "sass/_layout.scss" }}
-{{- $style4 :=  resources.Get "sass/_module.scss" }}
-{{- $style5 :=  resources.Get "sass/_shortcodes.scss" }}
-{{- $style := slice $style1 $style2 $style3 $style4 $style5 | resources.Concat "main.scss" | toCSS | minify }}
 <style amp-custom>
-  {{ replace $style.Content `@charset "UTF-8";` "" | safeCSS }}
+  {{- with partial "head/style.html" . }}
+   {{ replace .Content `@charset "UTF-8";` "" | safeCSS }}
+  {{- end }}
 
   {{- with resources.Get "font.css" | minify }}
     {{ replace .Content `@charset "UTF-8";` "" | safeCSS }}
