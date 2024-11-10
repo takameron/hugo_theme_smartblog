@@ -1,20 +1,14 @@
 {{- $title := "" -}}
+{{- $url := urls.Parse .Destination -}}
 {{- with .Title -}}
   {{- $title = . -}}
 {{- else -}}
-  {{- if strings.HasPrefix .Destination "http" -}}
-    {{- $url := .Destination -}}
-    {{- $getURL := printf "https://meta-api-sigma.vercel.app/api/?%s" (querify "url" $url ) -}}
-    {{- $metajson := getJSON $getURL -}}
-
-    {{- if $metajson.success -}}
-      {{- if $metajson.title -}}
-        {{- $title = $metajson.title -}}
-      {{- else if $metajson.metas.og_title -}}
-        {{- $title = $metajson.metas.og_title -}}
-      {{- end -}}
+  {{- if and $url.IsAbs (or (eq $url.Scheme "http") (eq $url.Scheme "https")) -}}
+    {{ $metaDict := partial "tools/html_meta.html" (dict "url" .Destination) -}}
+    {{- if $metaDict.title -}}
+      {{- $title = trim $metaDict.title " \n" -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
 
-<a href="{{ .Destination | safeURL }}"{{ with $title }} title="{{ . }}"{{ end }}{{ if strings.HasPrefix .Destination "http" }} target="_blank" rel="noopener" class="icon-new-tab"{{ end }}>{{ .Text | safeHTML }}</a>
+<a href="{{ .Destination | safeURL }}"{{ with $title }} title="{{ . }}"{{ end }}{{ if $url.IsAbs }} target="_blank" rel="noopener" class="icon-new-tab"{{ end }}>{{ .Text | safeHTML }}</a>
