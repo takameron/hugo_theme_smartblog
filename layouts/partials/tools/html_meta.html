@@ -1,0 +1,33 @@
+{{- $url := .url }}
+{{- $opts := .opts | default dict }}
+
+{{- $metaDict := dict }}
+{{- with resources.GetRemote $url $opts }}
+  {{- with .Err }}
+    {{- warnf "%s" . }}
+  {{- else }}
+    {{- $html := .Content }}
+
+    {{- $titleTag := findRE "<title>([^<]+)</title>" $html | first 1 }}
+    {{- if $titleTag }}
+      {{- $title := replaceRE "<title>([^<]+)</title>" "${1}" (index $titleTag 0) }}
+      {{- $metaDict = merge $metaDict (dict "title" $title) }}
+    {{- end }}
+
+    {{- $metaTags := findRE "<meta[^>]+>" $html }}
+    {{- range $metaTags }}
+      {{- $name := findRE "name=\"([^\"]+)\"" . | first 1 }}
+      {{- $property := findRE "property=\"([^\"]+)\"" . | first 1 }}
+      {{- $content := findRE "content=\"([^\"]+)\"" . | first 1 }}
+      {{- if and (or $name $property) $content }}
+        {{- $key := cond $name (replaceRE "name=\"([^\"]+)\"" "${1}" (index $name 0)) (replaceRE "property=\"([^\"]+)\"" "${1}" (index $property 0)) }}
+        {{- $key = replaceRE ":" "_" $key | lower }}
+        {{- $content := replaceRE "content=\"([^\"]+)\"" "${1}" (index $content 0) }}
+        {{- $metaDict = merge $metaDict (dict $key $content) }}
+      {{- end }}
+    {{- end }}
+    {{- return $metaDict }}
+  {{- end }}
+{{- else }}
+  {{- warnf "Unable to get remote resource %q" $url }}
+{{- end }}

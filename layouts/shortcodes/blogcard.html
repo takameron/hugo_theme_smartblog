@@ -1,7 +1,4 @@
-<!-- https://blog.a-1.dev/post/2019-04-20-blog-card/ -->
 {{- $url := .Get 0 -}}
-{{- $getURL := printf "https://meta-api-sigma.vercel.app/api/?%s" (querify "url" $url ) -}}
-{{- $metajson := getJSON $getURL -}}
 {{- $urlInfo := urls.Parse $url -}}
 {{- $host := printf "%s://%s/" $urlInfo.Scheme $urlInfo.Host -}}
 {{- $favicon := printf "https://www.google.com/s2/favicons?domain=%s" $urlInfo.Host -}}
@@ -10,36 +7,35 @@
 {{- $description := "" -}}
 {{- $image := "" -}}
 
-{{- if $metajson.success -}}
-  {{- if $metajson.title -}}
-    {{- $title = $metajson.title -}}
-  {{- else if $metajson.metas.og_title -}}
-    {{- $title = $metajson.metas.og_title -}}
-  {{- else -}}
-    {{- $title = $url -}}
-  {{- end -}}
-
-  {{- if $metajson.metas.description -}}
-    {{- $description = $metajson.metas.description -}}
-  {{- else if $metajson.metas.og_description -}}
-    {{- $description = $metajson.metas.og_description -}}
-  {{- end -}}
-
-  {{- if $metajson.metas.og_image -}}
-    {{- $image = $metajson.metas.og_image -}}
-  {{- else if $metajson.metas.twitter_image -}}
-    {{- $image = $metajson.metas.twitter_image -}}
-  {{- end -}}
-  {{- $imageUrlInfo := urls.Parse $image -}}
-  {{- if and (hasPrefix $image "/") (not $imageUrlInfo.Host) -}}
-    {{- $image = $host $image -}}
-  {{- else if (hasPrefix $image "//") -}}
-    {{- $image = print "https:" $image -}}
-  {{- end -}}
+{{ $metaDict := partial "tools/html_meta.html" (dict "url" $url) -}}
+{{- if $metaDict.title -}}
+  {{- $title = $metaDict.title -}}
+{{- else if $metaDict.og_title -}}
+  {{- $title = $metaDict.og_title -}}
 {{- else -}}
-  {{- $title := $metajson.url -}}
-  {{- $description := $metajson.statusText -}}
+  {{- $title = $url -}}
 {{- end -}}
+
+{{- if $metaDict.description -}}
+  {{- $description = $metaDict.description -}}
+{{- else if $metaDict.og_description -}}
+  {{- $description = $metaDict.og_description -}}
+{{- end -}}
+
+{{- if $metaDict.metas.og_image -}}
+  {{- $image = $metaDict.metas.og_image -}}
+{{- else if $metaDict.og_image_url -}}
+  {{- $image = $metaDict.og_image_url -}}
+{{- else if $metaDict.twitter_image -}}
+  {{- $image = $metaDict.twitter_image -}}
+{{- end -}}
+{{- $imageUrlInfo := urls.Parse $image -}}
+{{- if and (hasPrefix $image "/") (not $imageUrlInfo.Host) -}}
+  {{- $image = $host $image -}}
+{{- else if (hasPrefix $image "//") -}}
+  {{- $image = print "https:" $image -}}
+{{- end -}}
+{{ $image = replaceRE "^/" $host $image }}
 
 <div class="blogcard l-flex box">
   <div class="blogcard-body l-flex l-flex-column">
