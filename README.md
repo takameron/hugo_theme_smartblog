@@ -141,8 +141,6 @@ It is for blogs and has various functions.
 {{< blogcard "https://www.google.com/" >}}
 ```
 
-I am using the API at https://meta-api-sigma.vercel.app/api/ .
-
 | Attributes | Info             | Key | Order | Default Value | Required | 
 | ---------- | ---------------- | --- | ----- | ------------- | -------- | 
 | url        | URL of the site. |     | 0     |               | o        |
