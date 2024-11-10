@@ -6,7 +6,7 @@
   {{- if and $url.IsAbs (or (eq $url.Scheme "http") (eq $url.Scheme "https")) -}}
     {{ $metaDict := partial "tools/html_meta.html" (dict "url" .Destination) -}}
     {{- if $metaDict.title -}}
-      {{- $title = $metaDict.title -}}
+      {{- $title = trim $metaDict.title " \n" -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
