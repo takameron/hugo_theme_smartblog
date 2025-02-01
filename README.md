@@ -248,7 +248,7 @@ example : https://www.amazon.co.jp/dp/B08GCM963G/
 ### Twitter
 example : https://twitter.com/Twitter/status/1390725076996268038
 ```
-{{< twitter user="Twitter" id="1390725076996268038" >}}
+{{< x user="Twitter" id="1390725076996268038" >}}
 ```
 
 | Attributes | Info      | Key  | Order | Default Value | Required | 
