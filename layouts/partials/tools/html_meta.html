@@ -6,7 +6,7 @@
   {{- with .Err }}
     {{- warnf "%s" . }}
   {{- else with .Value }}
-    {{- $html := . }}
+    {{- $html := .Content }}
 
     {{- $titleTag := findRE "<title>([^<]+)</title>" $html | first 1 }}
     {{- if $titleTag }}
