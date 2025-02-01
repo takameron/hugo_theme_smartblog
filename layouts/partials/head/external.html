@@ -1,5 +1,5 @@
 {{- if .Site.Params.quicklink -}}
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.2.0/quicklink.umd.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js"></script>
 <script>
 window.addEventListener('load', () => {
   quicklink.listen();
@@ -8,9 +8,9 @@ window.addEventListener('load', () => {
 {{- end -}}
 
 {{- if .HasShortcode "math" -}}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous" media="print" onload="this.media='all'; this.onload=null;">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css" integrity="sha256-94eJG1UNVUwhSqiQLzmsRt8tvUj97FAKIECl3OHoq1g=" crossorigin="anonymous" media="print" onload="this.media='all'; this.onload=null;">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js" integrity="sha256-hjgR4rqghJx3vJLSbUT00KSEPCqKtSxGIBfepXMW5Ng=" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js" integrity="sha256-u1PrlTOUUxquNv3VNwZcQkTrhUKQGjzpFGAdkyZ1uKw=" crossorigin="anonymous"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     renderMathInElement(document.body, {
