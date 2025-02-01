@@ -57,6 +57,7 @@ It is for blogs and has various functions.
       description = "website description"
       logo = "apple-touch-icon.png"
       quicklink = true
+      summaryTruncateLength = 100 # Maximum length of article list summary
 
       [params.author]
         logo = "/img/default.png"
