@@ -2,11 +2,11 @@
 {{- $opts := .opts | default dict }}
 
 {{- $metaDict := dict }}
-{{- with resources.GetRemote $url $opts }}
+{{- with try (resources.GetRemote $url $opts) }}
   {{- with .Err }}
     {{- warnf "%s" . }}
-  {{- else }}
-    {{- $html := .Content }}
+  {{- else with .Value }}
+    {{- $html := . }}
 
     {{- $titleTag := findRE "<title>([^<]+)</title>" $html | first 1 }}
     {{- if $titleTag }}
