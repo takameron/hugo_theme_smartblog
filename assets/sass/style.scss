@@ -7,6 +7,8 @@
     --color-secondary: {{ .Site.Params.color.light.secondary | default "#5989cf" }};
     --color-headerfooter: {{ .Site.Params.color.light.headerfooter | default "white" }};
     --color-link: {{ .Site.Params.color.light.link | default "blue" }};
+    --color-codetext: {{ .Site.Params.color.dark.codetext | default "red" }};
+    --color-codebg: {{ .Site.Params.color.light.codebg | default "#e3e3e3" }};
   }
   @media (prefers-color-scheme: dark) {
     --color-base: {{ .Site.Params.color.dark.base | default "#333" }};
@@ -15,6 +17,8 @@
     --color-secondary: {{ .Site.Params.color.dark.secondary | default "#5989cf" }};
     --color-headerfooter: {{ .Site.Params.color.dark.headerfooter | default "white" }};
     --color-link: {{ .Site.Params.color.dark.link | default "#3495eb" }};
+    --color-codetext: {{ .Site.Params.color.dark.codetext | default "#e4e4e4" }};
+    --color-codebg: {{ .Site.Params.color.dark.codebg | default "#555" }};
   }
 }
 /* stylelint-enable */
@@ -25,6 +29,8 @@ $COLOR_PRIMARY: var(--color-primary);
 $COLOR_SECONDARY: var(--color-secondary);
 $COLOR_HEADERFOOTER: var(--color-headerfooter);
 $COLOR_LINK: var(--color-link);
+$COLOR_CODETEXT: var(--color-codetext);
+$COLOR_CODEBG: var(--color-codebg);
 
 $WIDTH-CONTAINER: 1100px;
 $WIDTH-MAIN: 640px;
