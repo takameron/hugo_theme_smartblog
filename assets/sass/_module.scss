@@ -335,8 +335,8 @@ div > pre.chroma {
     li {
       > code {
         padding: 0.2rem;
-        color: red;
-        background-color: #e3e3e3;
+        color: $COLOR-CODETEXT;
+        background-color: $COLOR-CODEBG;
       }
     }
   }
