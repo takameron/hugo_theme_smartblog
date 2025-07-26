@@ -11,8 +11,10 @@ body {
 }
 
 code {
+  line-height: 1.2em;
   font: {
     family: "SFMono-Regular", "Consolas", "Courier New", "Courier", monospace;
+    size: 0.9em;
   }
 }
 
@@ -137,7 +139,7 @@ table {
 
   th,
   td {
-    padding: 10px 0;
+    padding: 5px 10px;
     text-align: center;
   }
 
