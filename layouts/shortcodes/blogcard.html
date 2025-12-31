@@ -31,7 +31,7 @@
 {{- end -}}
 {{- $imageUrlInfo := urls.Parse $image -}}
 {{- if and (hasPrefix $image "/") (not $imageUrlInfo.Host) -}}
-  {{- $image = $host $image -}}
+  {{- $image = print $host $image -}}
 {{- else if (hasPrefix $image "//") -}}
   {{- $image = print "https:" $image -}}
 {{- end -}}
