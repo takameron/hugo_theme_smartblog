@@ -40,7 +40,7 @@ It is for blogs and has various functions.
     ```
     baseURL = "http://example.org/"
     title = "My New Hugo Site"
-    languageCode = "en-us"
+    locale = "en-us"
     hasCJKLanguage = false
     pygmentsUseClasses = true
     pygmentsCodefences = true
